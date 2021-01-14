@@ -33,6 +33,5 @@ public class PlayerMover : MonoBehaviour
         float z = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
         transform.Translate(transform.forward * z, Space.World);
         transform.Rotate(new Vector3(0, 1, 0), x);
-        Debug.Log(transform.forward);
     }
 }
