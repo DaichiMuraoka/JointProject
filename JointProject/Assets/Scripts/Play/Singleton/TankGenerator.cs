@@ -26,6 +26,12 @@ public class TankGenerator : Singleton<TankGenerator>
                 tank.transform
                 );
         }
+        else if(side == SIDE.ENEMY)
+        {
+            EnemyController ec = startPosition.gameObject.GetComponent<EnemyController>();
+            tank.gameObject.GetComponent<EnemyController>().CopyOtherEnemyController(ec);
+
+        }
         BattleManager.Instance.AddTankList(tank);
     }
 }

@@ -27,12 +27,20 @@ public class StartPosition : MonoBehaviour
             EnemyController enemyController = GetComponent<EnemyController>();
             if (enemyController != null)
             {
+#if UNITY_EDITOR
                 EditorApplication.delayCall += () => DestroyImmediate(enemyController);
+#else
+                Destroy(enemyController);
+#endif
             }
             EnemyMove enemyMove = GetComponent<EnemyMove>();
             if(enemyMove != null)
             {
+#if UNITY_EDITOR
                 EditorApplication.delayCall += () => DestroyImmediate(enemyMove);
+#else
+                Destroy(enemyMove);
+#endif
             }
         }
     }

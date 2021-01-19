@@ -8,55 +8,56 @@ public class EnemyController : Controller
     [SerializeField]
     private ENEMY_MOVE move = ENEMY_MOVE.PATROL;
 
-    private void Start()
+    public ENEMY_MOVE GetEnemyMove()
     {
-
+        return move;
     }
 
-    private void SetEnemyMove()
+    public void SetEnemyMove(ENEMY_MOVE _move)
     {
+        move = _move;
         EnemyMove em = GetComponent<EnemyMove>();
-        if (move == ENEMY_MOVE.PATROL)
+        if (_move == ENEMY_MOVE.PATROL)
         {
-            if(em is Patrol)
-            {
-                
-            }
-            else
+            if(!(em is Patrol))
             {
                 if(em != null)
                 {
+#if UNITY_EDITOR
                     EditorApplication.delayCall += () => DestroyImmediate(em);
+#else
+                    Destroy(em);
+#endif
                 }
                 gameObject.AddComponent<Patrol>();
             }
         }
-        else if(move == ENEMY_MOVE.CHASE)
+        else if(_move == ENEMY_MOVE.CHASE)
         {
-            if (em is Chase)
-            {
-                
-            }
-            else
+            if (!(em is Chase))
             {
                 if (em != null)
                 {
+#if UNITY_EDITOR
                     EditorApplication.delayCall += () => DestroyImmediate(em);
+#else
+                    Destroy(em);
+#endif
                 }
                 gameObject.AddComponent<Chase>();
             }
         }
         else
         {
-            if(em is Wait)
-            {
-
-            }
-            else
+            if(!(em is Wait))
             {
                 if (em != null)
                 {
+#if UNITY_EDITOR
                     EditorApplication.delayCall += () => DestroyImmediate(em);
+#else
+                    Destroy(em);
+#endif
                 }
                 gameObject.AddComponent<Wait>();
             }
@@ -65,7 +66,18 @@ public class EnemyController : Controller
 
     private void OnValidate()
     {
-        SetEnemyMove();
+        SetEnemyMove(move);
+    }
+
+    public void CopyOtherEnemyController(EnemyController ec)
+    {
+        SetEnemyMove(ec.GetEnemyMove());
+        EnemyMove em = ec.gameObject.GetComponent<EnemyMove>();
+#if UNITY_EDITOR
+        EditorApplication.delayCall += () => GetComponent<EnemyMove>().CopyOtherEnemyMove(em);
+#else
+        GetComponent<EnemyMove>().CopyOtherEnemyMove(em);
+#endif
     }
 }
 

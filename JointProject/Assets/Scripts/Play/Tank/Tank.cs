@@ -45,7 +45,7 @@ public class Tank : MonoBehaviour
             }
             else
             {
-                //gameObject.AddComponent<EnemyController>();
+                gameObject.AddComponent<EnemyController>();
             }
         }
     }

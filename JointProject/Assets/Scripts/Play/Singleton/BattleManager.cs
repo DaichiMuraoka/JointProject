@@ -26,4 +26,18 @@ public class BattleManager : Singleton<BattleManager>
             enemyList.Add(tank);
         }
     }
+
+    private void Start()
+    {
+        StartCoroutine(Test());
+    }
+
+    private IEnumerator Test()
+    {
+        yield return new WaitForSeconds(3f);
+        foreach(Tank tank in enemyList)
+        {
+            tank.GetComponent<Controller>().State = MOVE_STATE.MOVE;
+        }
+    }
 }
