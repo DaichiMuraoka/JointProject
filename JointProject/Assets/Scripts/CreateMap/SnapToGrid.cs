@@ -1,8 +1,16 @@
-﻿using System;
+﻿//kanoko
+
+//https://qiita.com/keroxp/items/97d375786617c9eca783
+//より借用したスクリプトを改変
+//プレイ中にマップパーツをグリッドにスナップするために用いる
+
+using System;
 using UnityEngine;
+
 namespace Hexat.Editor
 {
-    [ExecuteInEditMode]
+    //[ExecuteInEditMode]
+    //Rendererが必須
     [RequireComponent(typeof(Renderer))]
     public class SnapToGrid : MonoBehaviour
     {
@@ -31,7 +39,8 @@ namespace Hexat.Editor
         [SerializeField] private HorizontalPivot _horizontalPivot = HorizontalPivot.Middle;
         [SerializeField] private VerticalPivot _verticalPivot = VerticalPivot.Midle;
 
-        private void OnEnable()
+        //Rendererコンポーネントを読み込む
+        private void Start()
         {
             _renderer = GetComponent<Renderer>();
         }
@@ -89,6 +98,7 @@ namespace Hexat.Editor
             }
         }
 
+        //オブジェクトをグリッドにスナップ
         private void DoSnap()
         {
             var x = minX + cellSize.x * width;
@@ -99,46 +109,13 @@ namespace Hexat.Editor
             if (isOdd) y0 -= cellSize.y / 2;
             var dx = x - x0 > 0.5f ? x0 + cellSize.x - x : x0 - x;
             var dy = y - y0 > 0.5f ? y0 + cellSize.y - y : y0 - y;
-            transform.position += new Vector3(dx, dy, 0);
+            transform.position += new Vector3(dx, 0, dy);
         }
 
         private void Update()
         {
-            if (!Application.isPlaying)
-            {
-                DoSnap();
-            }
+            DoSnap();
         }
 
-        void OnDrawGizmos()
-        {
-            // ギズモのアイコンは自分で設定してね！
-            Gizmos.DrawIcon(pivotCenter, "MyGizmoCircleOrange");
-            Gizmos.color = Color.blue;
-            for (var i = 0; i < width; i++)
-            {
-                for (var j = 0; j < height; j++)
-                {
-                    var l = minX + i * cellSize.x;
-                    var t = minY + j * cellSize.y;
-                    var r = l + cellSize.x;
-                    var b = t + cellSize.y;
-                    DrawQuad(l, t, r, b);
-                }
-            }
-        }
-
-        private static void DrawQuad(float l, float t, float r, float b)
-        {
-            DrawLine2D(l, t, r, t);
-            DrawLine2D(r, t, r, b);
-            DrawLine2D(r, b, l, b);
-            DrawLine2D(l, b, l, t);
-        }
-
-        private static void DrawLine2D(float sx, float sy, float ex, float ey)
-        {
-            Gizmos.DrawLine(new Vector3(sx, sy, 0), new Vector3(ex, ey, 0));
-        }
     }
 }
