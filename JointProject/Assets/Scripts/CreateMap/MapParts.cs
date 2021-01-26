@@ -2,12 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//マップパートのサイズに合ったBoxColliderが必須
+[RequireComponent(typeof(BoxCollider))]
 public class MapParts : MonoBehaviour
 {   
+    private BoxCollider boxCollider;
+    private float width; //マップパーツの横幅(x)
+    private float height; //マップパーツの縦幅(z)
+    private bool isOverlapped = false; //マップが重なっているかどうか
+    private Vector3 previousPosition; //前フレーム時のポジション
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        boxCollider = this.gameObject.GetComponent<BoxCollider>();
+        width = boxCollider.size.x;
+        height = boxCollider.size.z;
+        previousPosition = this.gameObject.transform.position;
     }
 
     // Update is called once per frame
@@ -16,19 +27,58 @@ public class MapParts : MonoBehaviour
         
     }
     
-    void OnTriggerEnter(Collider other) {
-		//他のマップパーツと重なったら
-        //全体を赤く表示する
+    void OnCollisionEnter(Collision other) {
+		//他のマップパーツと隣接しているとき
+        //全体を白く表示する
         if(other.gameObject.tag == "MapParts"){
-            changeAllMaterialsColor(this.gameObject, Color.red);
+            changeAllMaterialsColor(this.gameObject, Color.white);
         }
 	}
     
-	void OnTriggerExit(Collider other) {
+	void OnCollisionStay(Collision other) {
+        //移動時のみ判定
+        if(previousPosition != this.gameObject.transform.position)
+        {
+            //他のマップパーツと重なっているとき
+            //全体を赤く表示する
+            if(other.gameObject.tag == "MapParts"){
+                if(isOverlapped == false){
+                    float separation = 0;
+                    foreach (ContactPoint point in other.contacts)
+                    {
+                        separation = point.separation;
+                    }
+                    if(separation < 0)
+                    {
+                        changeAllMaterialsColor(this.gameObject, Color.red);
+                        changeAllMaterialsColor(other.gameObject, Color.red);
+                        isOverlapped = true;
+                    }
+                }else{
+                    float separation = -1;
+                    foreach (ContactPoint point in other.contacts)
+                    {
+                        separation = point.separation;
+                    }
+                    if(separation == 0)
+                    {
+                        changeAllMaterialsColor(this.gameObject, Color.white);
+                        changeAllMaterialsColor(other.gameObject, Color.white);
+                        isOverlapped = false;
+                    }
+                }
+            }
+        }
+        //ポジションを更新
+        previousPosition = this.gameObject.transform.position;
+	}
+    
+	void OnCollisionExit(Collision other) {
 		//他のマップパーツと離れたら
-        //元通り表示する(白を想定)
+        //全体をグレーに表示する
         if(other.gameObject.tag == "MapParts"){
-            changeAllMaterialsColor(this.gameObject, Color.white);
+            changeAllMaterialsColor(this.gameObject, Color.gray);
+            isOverlapped = false;
         }
 	}
     
