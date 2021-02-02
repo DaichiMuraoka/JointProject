@@ -85,15 +85,16 @@ public class MergeButtonController : MonoBehaviour
     /// <param name="selected">MapPartsのインデックス</param>
     private void judgeMapPartsAdjacent(int selected)
     {
-        int contactBlockNum_int = 3; //最低隣接しなければならないブロック数
-        float errorValue = 0.7f; //許容される誤差
-        float contactBlockNum = contactBlockNum_int - errorValue;
+        int contactBlockNum = 3; //最低隣接しなければならないブロック数
+        float errorValue = 0.5f; //許容される誤差
         
         Vector3 selectedTop = mapParts[selected].transform.position + colliders[selected].center
             + colliders[selected].size/2;
         Vector3 selectedBottom = mapParts[selected].transform.position + colliders[selected].center
             - colliders[selected].size/2;
-        int sumAdjacent = 0; //隣接マップパーツ数
+        Vector3 selectedSize = colliders[selected].size;
+        
+        int sumAdjacent = 0; //隣接マップパーツ数カウンタ
         
         for(int i=0; i<mapParts.Length; i++)
         {
@@ -104,17 +105,20 @@ public class MergeButtonController : MonoBehaviour
                     + colliders[i].size/2;
                 Vector3 otherBottom = mapParts[i].transform.position + colliders[i].center
                     - colliders[i].size/2;
+                Vector3 otherSize = colliders[i].size;
+                Vector3 MaxDistance = selectedSize + colliders[i].size;
+                MaxDistance += new Vector3(errorValue - contactBlockNum, errorValue - contactBlockNum, errorValue - contactBlockNum);
                 
                 //隣接判定 
                 if( ((Mathf.Abs(selectedTop.z - otherBottom.z) < errorValue
                     || Mathf.Abs(selectedBottom.z - otherTop.z) < errorValue) &&
-                        ((otherBottom.x + contactBlockNum <= selectedTop.x && selectedTop.x <= otherTop.x)
-                        || (otherBottom.x <= selectedBottom.x && selectedBottom.x <= otherTop.x - contactBlockNum )))
+                        ((0 <= selectedTop.x - otherBottom.x && selectedTop.x - otherBottom.x < MaxDistance.x)
+                        && (0 <= otherTop.x - selectedBottom.x && otherTop.x - selectedBottom.x < MaxDistance.x)))
                 || 
                     ((Mathf.Abs(selectedTop.x - otherBottom.x) < errorValue
                     || Mathf.Abs(selectedBottom.x - otherTop.x) < errorValue) &&
-                        ((otherBottom.z + contactBlockNum <= selectedTop.z && selectedTop.z <= otherTop.z)
-                        || (otherBottom.z <= selectedBottom.z && selectedBottom.z <= otherTop.z - contactBlockNum ))))
+                        ((0 <= selectedTop.z - otherBottom.z && selectedTop.z - otherBottom.z < MaxDistance.z)
+                        && (0 <= otherTop.z - selectedBottom.z && otherTop.z - selectedBottom.z < MaxDistance.z))) )
                 {
                         changeMapPartsEnablement(i, true); //Bottom側の判定が不安定なので念のため
                         sumAdjacent++;
