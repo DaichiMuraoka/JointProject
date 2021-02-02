@@ -15,7 +15,7 @@ public class MoveByDrag : MonoBehaviour
     //グリッドにスナップさせるか
     [SerializeField] private bool snapGrid = false;
     //仮想グリッドのセルサイズ
-    [SerializeField] private int cellSize = 1;
+    //[SerializeField] private int cellSize = 1;
     
     //オブジェクトをつかんでいるか
     private bool isGrabbing;
