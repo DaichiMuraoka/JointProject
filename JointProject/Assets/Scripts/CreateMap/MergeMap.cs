@@ -5,7 +5,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MergeMap : MonoBehaviour
-{   
+{
+    [SerializeField]
+    private MapDeliverer mapDeliverer = null;
+
     public void OnClick()
     {
         //不要な壁を削除してマップを繋げる
@@ -49,5 +52,7 @@ public class MergeMap : MonoBehaviour
                 Destroy(wall);
             }
         }
+
+        //mapDeliverer.Map = "mapPartの親";
     }
 }
