@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - MAST_Holder
+  - Map_floor
+  - Map_wall
+  - MapParts
   layers:
   - Default
   - TransparentFX
