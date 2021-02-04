@@ -13,8 +13,10 @@ GameObject:
   - component: {fileID: 7292979010116688834}
   - component: {fileID: 3268198206100756128}
   - component: {fileID: 4998716810309693184}
+  - component: {fileID: -6530539457931016324}
+  - component: {fileID: 6969124623336920511}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: TankPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,6 +113,42 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &-6530539457931016324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720498432240899992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cdc332c94b3a7f49b24e14c83cf6c0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nomalMuzzle: {fileID: 2232775358892972795}
+  flyMuzzle: {fileID: 8690652610982467995}
+--- !u!114 &6969124623336920511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720498432240899992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baf09b76c22a6a7498adac0f678e4076, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nomalBullet: {fileID: 5435265090469950774, guid: 3250fd80047883747aac0c2c9d547e63,
+    type: 3}
+  nomalFireKey: 101
+  nomalFireSpeed: 500
+  flyBullet: {fileID: 765133466254268844, guid: ec1a25ffe0212214d8467fefc2e32dee,
+    type: 3}
+  flyFireKey: 102
+  flyFireSpeed: 150
+  flyUpPower: 2
+  coolTime: 1
 --- !u!1 &1953213036359360921
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,7 +159,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2232775358892972795}
   m_Layer: 0
-  m_Name: Muzzle
+  m_Name: NomalMuzzle
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -135,7 +173,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1953213036359360921}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.75}
+  m_LocalPosition: {x: 0, y: 0, z: 1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4852065979049916575}
@@ -172,6 +210,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 2232775358892972795}
+  - {fileID: 8690652610982467995}
   m_Father: {fileID: 4426236127120196813}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -235,3 +274,33 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &7163925394300738200
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8690652610982467995}
+  m_Layer: 0
+  m_Name: FlyMuzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8690652610982467995
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7163925394300738200}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4852065979049916575}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

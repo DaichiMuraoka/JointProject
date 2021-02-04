@@ -4,5 +4,10 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    
+    public SIDE Side = SIDE.NONE;
+
+    public void Explosion()
+    {
+        Destroy(gameObject);
+    }
 }
