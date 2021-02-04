@@ -32,7 +32,10 @@ public class TankGenerator : Singleton<TankGenerator>
             tank.gameObject.GetComponent<EnemyController>().CopyOtherEnemyController(ec);
 
         }
-        BattleManager.Instance.AddTankList(tank);
+        if(BattleManager.Instance != null)
+        {
+            BattleManager.Instance.AddTankList(tank);
+        }
     }
 }
 

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Controller : MonoBehaviour
 {
+    [SerializeField]
     private MOVE_STATE state = MOVE_STATE.FREEZE;
 
     public MOVE_STATE State
