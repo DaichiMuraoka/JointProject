@@ -27,6 +27,31 @@ public class BattleManager : Singleton<BattleManager>
         }
     }
 
+    public void DeleteTankList(Tank tank)
+    {
+        if (playerList.Contains(tank))
+        {
+            playerList.Remove(tank);
+        }
+        else if (enemyList.Contains(tank))
+        {
+            enemyList.Remove(tank);
+        }
+        CheckGameOver();
+    }
+
+    private void CheckGameOver()
+    {
+        if(playerList.Count == 0)
+        {
+            GameOver(SIDE.PLAYER);
+        }
+        else if(enemyList.Count == 0)
+        {
+            GameOver(SIDE.ENEMY);
+        }
+    }
+
     private void Start()
     {
         StartCoroutine(Test());
@@ -38,6 +63,18 @@ public class BattleManager : Singleton<BattleManager>
         foreach(Tank tank in enemyList)
         {
             tank.GetComponent<Controller>().State = MOVE_STATE.MOVE;
+        }
+    }
+
+    private void GameOver(SIDE side)
+    {
+        if (side == SIDE.PLAYER)
+        {
+            Debug.Log("you lose.");
+        }
+        else if(side == SIDE.ENEMY)
+        {
+            Debug.Log("you win!");
         }
     }
 }

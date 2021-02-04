@@ -73,6 +73,7 @@ public class Tank : MonoBehaviour
     private void Explosion(Collision collision)
     {
         collision.gameObject.GetComponent<Bullet>().Explosion();
+        BattleManager.Instance.DeleteTankList(this);
         Destroy(gameObject);
     }
 }
