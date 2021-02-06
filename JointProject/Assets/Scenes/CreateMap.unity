@@ -145,10 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bf8234e5678c2745a3c3fa7927012e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  route:
-  - {fileID: 879312622}
-  - {fileID: 1137648120}
-  - {fileID: 1533536615}
+  route: []
 --- !u!114 &372954494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,7 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55b48f17f14677241bc0c9dc2159431c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 1
+  state: 0
   moveSpeed: 5
   rotationSpeed: 200
   move: 0
@@ -1168,6 +1165,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StartPosition
+      objectReference: {fileID: 0}
+    - target: {fileID: 3383992039540089234, guid: 2abc946a615b0d94b9b6cc63b584ebd3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4575653254546570911, guid: 2abc946a615b0d94b9b6cc63b584ebd3,
         type: 3}
