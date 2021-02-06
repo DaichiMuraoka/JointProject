@@ -62,6 +62,8 @@ public class MergeButtonController : MonoBehaviour
         for(int i=0; i<mapParts.Length; i++){
             //マップパーツが移動したとき
             if(mapParts[i].transform.position != previousPositions[i]){
+                //つながりを初期化
+                connected.Clear();
                 //侵入判定を更新
                 judgeMapPartsIntrusion(i);
                 
@@ -139,11 +141,6 @@ public class MergeButtonController : MonoBehaviour
         }
         
         if(selected == 0){
-            connected.Clear();
-            
-            for(int i=0; i<appeared.Length; i++)
-                Debug.Log("appeared["+i+"]:"+appeared[i]);
-            
             for(int i=0; i<appeared.Length; i++)
                 if(appeared[i] == false)
                     return false;
@@ -165,9 +162,7 @@ public class MergeButtonController : MonoBehaviour
         intrusion[selected] = false;
         for(int i=0; i<mapParts.Length; i++)
         {
-            if(i == selected){
-                i++;
-            }else{
+            if(i != selected){
                 Vector3 otherPos = mapParts[i].transform.position + colliders[i].center;
                 Vector3 otherSize = colliders[i].size/2;
                 Vector3 MaxDistance = selectedSize + otherSize;
@@ -202,9 +197,7 @@ public class MergeButtonController : MonoBehaviour
         
         for(int i=0; i<mapParts.Length; i++)
         {
-            if(i == selected){
-                i++;
-            }else{
+            if(i != selected){
                 Vector3 otherPos = mapParts[i].transform.position + colliders[i].center;
                 Vector3 otherSize = colliders[i].size/2;
                 Vector3 MaxDistance = selectedSize + otherSize;
@@ -216,8 +209,6 @@ public class MergeButtonController : MonoBehaviour
                 if((Mathf.Abs(dx - MaxDistance.x) < errorValue && dz < MaxDistance.z - contactBlockNum + errorValue)
                 || (Mathf.Abs(dz - MaxDistance.z) < errorValue && dx < MaxDistance.x - contactBlockNum + errorValue) )
                 {
-                    if(intrusion[i] == false)
-                        changeMapPartsEnablement(i, true); //Bottom側の判定が不安定なので念のため
                     connected.Add(new List<int>{selected, i}); //隣接している組み合わせを保存
                     sumAdjacent++;
                 }
