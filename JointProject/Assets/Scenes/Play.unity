@@ -216,9 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bf8234e5678c2745a3c3fa7927012e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  route:
-  - {fileID: 1447518070}
-  - {fileID: 1957686902}
+  route: []
 --- !u!114 &312385153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,9 +229,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55b48f17f14677241bc0c9dc2159431c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: 1
   moveSpeed: 5
   rotationSpeed: 200
   move: 0
+  target: 0
 --- !u!114 &312385154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,9 +380,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55b48f17f14677241bc0c9dc2159431c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: 1
   moveSpeed: 5
   rotationSpeed: 200
   move: 0
+  target: 0
 --- !u!1 &828097872
 GameObject:
   m_ObjectHideFlags: 0

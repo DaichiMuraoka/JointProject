@@ -8,70 +8,78 @@ public class EnemyController : Controller
     [SerializeField]
     private ENEMY_MOVE move = ENEMY_MOVE.PATROL;
 
-    public ENEMY_MOVE GetEnemyMove()
+    public ENEMY_MOVE Move
     {
-        return move;
+        get { return move; }
+        set
+        {
+            move = value;
+            EnemyMove em = GetComponent<EnemyMove>();
+            if (value == ENEMY_MOVE.PATROL)
+            {
+                if (!(em is Patrol))
+                {
+                    if (em != null)
+                    {
+#if UNITY_EDITOR
+                        EditorApplication.delayCall += () => DestroyImmediate(em);
+#else
+                    Destroy(em);
+#endif
+                    }
+                    gameObject.AddComponent<Patrol>();
+                }
+            }
+            else if (value == ENEMY_MOVE.CHASE)
+            {
+                if (!(em is Chase))
+                {
+                    if (em != null)
+                    {
+#if UNITY_EDITOR
+                        EditorApplication.delayCall += () => DestroyImmediate(em);
+#else
+                    Destroy(em);
+#endif
+                    }
+                    gameObject.AddComponent<Chase>();
+                }
+            }
+            else
+            {
+                if (!(em is Wait))
+                {
+                    if (em != null)
+                    {
+#if UNITY_EDITOR
+                        EditorApplication.delayCall += () => DestroyImmediate(em);
+#else
+                    Destroy(em);
+#endif
+                    }
+                    gameObject.AddComponent<Wait>();
+                }
+            }
+        }
     }
 
-    public void SetEnemyMove(ENEMY_MOVE _move)
+    [SerializeField]
+    private ENEMY_TARGET target = ENEMY_TARGET.NEAREST;
+
+    public ENEMY_TARGET Target
     {
-        move = _move;
-        EnemyMove em = GetComponent<EnemyMove>();
-        if (_move == ENEMY_MOVE.PATROL)
-        {
-            if(!(em is Patrol))
-            {
-                if(em != null)
-                {
-#if UNITY_EDITOR
-                    EditorApplication.delayCall += () => DestroyImmediate(em);
-#else
-                    Destroy(em);
-#endif
-                }
-                gameObject.AddComponent<Patrol>();
-            }
-        }
-        else if(_move == ENEMY_MOVE.CHASE)
-        {
-            if (!(em is Chase))
-            {
-                if (em != null)
-                {
-#if UNITY_EDITOR
-                    EditorApplication.delayCall += () => DestroyImmediate(em);
-#else
-                    Destroy(em);
-#endif
-                }
-                gameObject.AddComponent<Chase>();
-            }
-        }
-        else
-        {
-            if(!(em is Wait))
-            {
-                if (em != null)
-                {
-#if UNITY_EDITOR
-                    EditorApplication.delayCall += () => DestroyImmediate(em);
-#else
-                    Destroy(em);
-#endif
-                }
-                gameObject.AddComponent<Wait>();
-            }
-        }
+        get { return target; }
+
     }
 
     private void OnValidate()
     {
-        SetEnemyMove(move);
+        Move = move;
     }
 
     public void CopyOtherEnemyController(EnemyController ec)
     {
-        SetEnemyMove(ec.GetEnemyMove());
+        Move = ec.Move;
         EnemyMove em = ec.gameObject.GetComponent<EnemyMove>();
 #if UNITY_EDITOR
         EditorApplication.delayCall += () => GetComponent<EnemyMove>().CopyOtherEnemyMove(em);
@@ -86,4 +94,10 @@ public enum ENEMY_MOVE
 	PATROL,
     CHASE,
 	WAIT
+}
+
+public enum ENEMY_TARGET
+{
+    NEAREST,
+    RANDOM
 }

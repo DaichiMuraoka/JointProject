@@ -7,6 +7,11 @@ public class BattleManager : Singleton<BattleManager>
     [SerializeField]
     private List<Tank> playerList = new List<Tank>();
 
+    public List<Tank> PlayerList
+    {
+        get { return playerList; }
+    }
+
     [SerializeField]
     private List<Tank> enemyList = new List<Tank>();
 

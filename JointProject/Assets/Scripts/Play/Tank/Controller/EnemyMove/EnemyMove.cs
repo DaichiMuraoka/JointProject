@@ -13,9 +13,7 @@ public class EnemyMove : MonoBehaviour
         MovePerFrame();
     }
 
-    public virtual void MovePerFrame()
-    {
-    }
+    public virtual void MovePerFrame() { }
 
     public virtual void CopyOtherEnemyMove(EnemyMove em) { }
 
