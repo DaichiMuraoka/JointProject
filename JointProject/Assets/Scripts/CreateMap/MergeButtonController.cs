@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class MergeButtonController : MonoBehaviour
 {
     [SerializeField]
-    private GameObject mergeButton;
+    private GameObject mergeButton = null;
     
     private Button mergeButtonComponent;
     private GameObject[] mapParts;
