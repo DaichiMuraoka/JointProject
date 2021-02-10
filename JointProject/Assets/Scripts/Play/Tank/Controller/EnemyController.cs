@@ -7,7 +7,7 @@ public class EnemyController : Controller
 {
     [SerializeField]
     private ENEMY_MOVE move = ENEMY_MOVE.PATROL;
-
+    
     public ENEMY_MOVE Move
     {
         get { return move; }
@@ -24,7 +24,7 @@ public class EnemyController : Controller
 #if UNITY_EDITOR
                         EditorApplication.delayCall += () => DestroyImmediate(em);
 #else
-                    Destroy(em);
+                        Destroy(em);
 #endif
                     }
                     gameObject.AddComponent<Patrol>();
@@ -71,7 +71,7 @@ public class EnemyController : Controller
         get { return target; }
 
     }
-
+    
     private void OnValidate()
     {
         Move = move;
