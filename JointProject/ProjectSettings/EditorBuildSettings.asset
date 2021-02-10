@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Play.unity
     guid: 4f7e9eb8898d9a541bb1bc081736c740
+  - enabled: 1
+    path: Assets/Scenes/LevelSelect.unity
+    guid: 3348b8a377e6b1347928013933eee240
+  - enabled: 1
+    path: Assets/Scenes/CreateMap.unity
+    guid: 06161a6541b1aad4c8ea2642388603e6
   m_configObjects: {}

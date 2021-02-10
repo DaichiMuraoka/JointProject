@@ -29,6 +29,21 @@ public class MergeButtonController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mergeButtonComponent = mergeButton.GetComponent<Button>();
+        //ボタンを無効に設定
+        changeButtonInteractable(false);
+        
+        //1フレーム待つ
+        StartCoroutine(initCoroutine());
+    }
+    
+    private IEnumerator initCoroutine(){
+        yield return null;
+        init();
+    }
+    
+    void init()
+    {
         //全てのMapPartsを取得
         mapParts = GameObject.FindGameObjectsWithTag ("MapParts");
         
@@ -50,10 +65,6 @@ public class MergeButtonController : MonoBehaviour
             //MapPartsを無効に変更
             changeMapPartsEnablement(i, false);
         }
-        
-        mergeButtonComponent = mergeButton.GetComponent<Button>();
-        //ボタンを無効に設定
-        changeButtonInteractable(false);
     }
 
     // Update is called once per frame
@@ -74,7 +85,7 @@ public class MergeButtonController : MonoBehaviour
                 //前回位置を更新
                 previousPositions[i] = mapParts[i].transform.position;
                 
-                //全てのマップパーツが有効のとき
+                //全てのマップパーツが有効か
                 int enableSum = 0;
                 for(int j=0; j<mapParts.Length; j++)
                     if(mapPartsEnable[j]) enableSum++;
@@ -141,6 +152,9 @@ public class MergeButtonController : MonoBehaviour
         }
         
         if(selected == 0){
+            for(int i=0; i<appeared.Length; i++)
+                Debug.Log(i+":"+appeared[i]);
+            
             for(int i=0; i<appeared.Length; i++)
                 if(appeared[i] == false)
                     return false;

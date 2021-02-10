@@ -10,8 +10,8 @@ public class SetLevel : MonoBehaviour
     [SerializeField]
     private MapDeliverer mapDeliverer = null;
     
-    // Start is called before the first frame update
-    void Start()
+    //Startより前に実行される
+    void Awake()
     {
         Instantiate(mapDeliverer.Map);
     }

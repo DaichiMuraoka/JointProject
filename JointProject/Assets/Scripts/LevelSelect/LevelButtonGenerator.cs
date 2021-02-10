@@ -8,19 +8,20 @@ using UnityEngine.EventSystems;
 using System;
 using System.Collections.Generic;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
-public class LevelBottunGenerator : MonoBehaviour
+public class LevelButtonGenerator : MonoBehaviour
 {
     [SerializeField] private GameObject[] levels = null;
     [SerializeField] private GameObject content = null;
-    [SerializeField] private GameObject levelBottun = null;
+    [SerializeField] private GameObject levelButton = null;
     [SerializeField] private MapDeliverer mapDeliverer = null;
     
     void Start(){
         
         for(int i = 0; i < levels.Length; i++) {
             //プレハブからボタンを生成
-            GameObject listButton = Instantiate(levelBottun) as GameObject;
+            GameObject listButton = Instantiate(levelButton) as GameObject;
             
             //content の子にする
             listButton.transform.SetParent(content.transform, false);
@@ -29,14 +30,15 @@ public class LevelBottunGenerator : MonoBehaviour
 
             int n = i;
             //クリック時の関数を設定
-            listButton.GetComponent<Button>().onClick.AddListener(() => OnClickLevelBottun(n));
+            listButton.GetComponent<Button>().onClick.AddListener(() => OnClickLevelButton(n));
         }
         
     }
 
-    void OnClickLevelBottun(int index){
+    void OnClickLevelButton(int index){
         //デリバラーにレベルをセット
         mapDeliverer.Map = levels[index];
         //シーン遷移
+        SceneManager.LoadScene("CreateMap");
     }
 }
