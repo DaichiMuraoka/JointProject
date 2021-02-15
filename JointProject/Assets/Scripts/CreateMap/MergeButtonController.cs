@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class MergeButtonController : MonoBehaviour
 {
     [SerializeField]
-    private GameObject mergeButton;
+    private GameObject mergeButton = null;
     
     private Button mergeButtonComponent;
     private GameObject[] mapParts;
@@ -29,6 +29,10 @@ public class MergeButtonController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mergeButtonComponent = mergeButton.GetComponent<Button>();
+        //ボタンを無効に設定
+        changeButtonInteractable(false);
+        
         //全てのMapPartsを取得
         mapParts = GameObject.FindGameObjectsWithTag ("MapParts");
         
@@ -50,10 +54,6 @@ public class MergeButtonController : MonoBehaviour
             //MapPartsを無効に変更
             changeMapPartsEnablement(i, false);
         }
-        
-        mergeButtonComponent = mergeButton.GetComponent<Button>();
-        //ボタンを無効に設定
-        changeButtonInteractable(false);
     }
 
     // Update is called once per frame
@@ -62,6 +62,8 @@ public class MergeButtonController : MonoBehaviour
         for(int i=0; i<mapParts.Length; i++){
             //マップパーツが移動したとき
             if(mapParts[i].transform.position != previousPositions[i]){
+                //つながりを初期化
+                connected.Clear();
                 //侵入判定を更新
                 judgeMapPartsIntrusion(i);
                 
@@ -72,7 +74,7 @@ public class MergeButtonController : MonoBehaviour
                 //前回位置を更新
                 previousPositions[i] = mapParts[i].transform.position;
                 
-                //全てのマップパーツが有効のとき
+                //全てのマップパーツが有効か
                 int enableSum = 0;
                 for(int j=0; j<mapParts.Length; j++)
                     if(mapPartsEnable[j]) enableSum++;
@@ -114,19 +116,14 @@ public class MergeButtonController : MonoBehaviour
                 if(appeared[i] == true) appearedCount++;
         if(appearedCount == appeared.Length) return true;
         
-        //connectedがなくなったら打ち切り
-        if(connected.Count == 0) return false;
-        
         //次の行き先をリストに追加
         List<int> contactParts = new List<int>();
         for(int i=0; i<connected.Count; i++){
             if(connected[i][0] == selected){
                 if(appeared[connected[i][1]] == false) contactParts.Add(connected[i][1]);
-                connected.RemoveAt(i);
             }
             else if(connected[i][1] == selected){
                 if(appeared[connected[i][0]] == false) contactParts.Add(connected[i][0]);
-                connected.RemoveAt(i);
             }
         }
         
@@ -139,11 +136,6 @@ public class MergeButtonController : MonoBehaviour
         }
         
         if(selected == 0){
-            connected.Clear();
-            
-            for(int i=0; i<appeared.Length; i++)
-                Debug.Log("appeared["+i+"]:"+appeared[i]);
-            
             for(int i=0; i<appeared.Length; i++)
                 if(appeared[i] == false)
                     return false;
@@ -165,9 +157,7 @@ public class MergeButtonController : MonoBehaviour
         intrusion[selected] = false;
         for(int i=0; i<mapParts.Length; i++)
         {
-            if(i == selected){
-                i++;
-            }else{
+            if(i != selected){
                 Vector3 otherPos = mapParts[i].transform.position + colliders[i].center;
                 Vector3 otherSize = colliders[i].size/2;
                 Vector3 MaxDistance = selectedSize + otherSize;
@@ -202,9 +192,7 @@ public class MergeButtonController : MonoBehaviour
         
         for(int i=0; i<mapParts.Length; i++)
         {
-            if(i == selected){
-                i++;
-            }else{
+            if(i != selected){
                 Vector3 otherPos = mapParts[i].transform.position + colliders[i].center;
                 Vector3 otherSize = colliders[i].size/2;
                 Vector3 MaxDistance = selectedSize + otherSize;
@@ -216,8 +204,6 @@ public class MergeButtonController : MonoBehaviour
                 if((Mathf.Abs(dx - MaxDistance.x) < errorValue && dz < MaxDistance.z - contactBlockNum + errorValue)
                 || (Mathf.Abs(dz - MaxDistance.z) < errorValue && dx < MaxDistance.x - contactBlockNum + errorValue) )
                 {
-                    if(intrusion[i] == false)
-                        changeMapPartsEnablement(i, true); //Bottom側の判定が不安定なので念のため
                     connected.Add(new List<int>{selected, i}); //隣接している組み合わせを保存
                     sumAdjacent++;
                 }

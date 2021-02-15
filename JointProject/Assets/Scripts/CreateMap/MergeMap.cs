@@ -52,7 +52,15 @@ public class MergeMap : MonoBehaviour
                 Destroy(wall);
             }
         }
+        
+        //マップパーツのコライダーを外す
+        GameObject[] mapParts = GameObject.FindGameObjectsWithTag ("MapParts");
+        foreach (GameObject part in mapParts)
+        {
+            Destroy(part.GetComponent<BoxCollider>());
+        }
 
-        //mapDeliverer.Map = "mapPartの親";
+        //合成したマップをスクリプタブルに保存
+        mapDeliverer.Map = mapParts[0].transform.parent.gameObject;
     }
 }

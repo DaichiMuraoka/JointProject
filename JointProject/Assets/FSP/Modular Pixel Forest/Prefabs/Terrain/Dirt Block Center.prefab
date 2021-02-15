@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -5829191716209821522}
   m_Layer: 0
   m_Name: Dirt Block Center
-  m_TagString: Untagged
+  m_TagString: Map_innerWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -160,7 +160,7 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 2dd42a2cf228c7a4f9b4e8ac4c038497, type: 2}

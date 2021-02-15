@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: -6253309387374942287}
   m_Layer: 0
   m_Name: Grass Block
-  m_TagString: Untagged
+  m_TagString: Map_floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
