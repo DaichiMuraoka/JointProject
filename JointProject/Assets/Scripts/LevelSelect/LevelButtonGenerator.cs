@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class LevelButtonGenerator : MonoBehaviour
 {
@@ -26,7 +27,7 @@ public class LevelButtonGenerator : MonoBehaviour
             //content の子にする
             listButton.transform.SetParent(content.transform, false);
             //ボタンの表示文字を設定
-            listButton.transform.GetChild(0).GetComponent<Text>().text = "レベル" + (i+1).ToString();
+            listButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "レベル" + (i+1).ToString();
 
             int n = i;
             //クリック時の関数を設定

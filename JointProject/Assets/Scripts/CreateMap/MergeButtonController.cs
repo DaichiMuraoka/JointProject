@@ -33,17 +33,6 @@ public class MergeButtonController : MonoBehaviour
         //ボタンを無効に設定
         changeButtonInteractable(false);
         
-        //1フレーム待つ
-        StartCoroutine(initCoroutine());
-    }
-    
-    private IEnumerator initCoroutine(){
-        yield return null;
-        init();
-    }
-    
-    void init()
-    {
         //全てのMapPartsを取得
         mapParts = GameObject.FindGameObjectsWithTag ("MapParts");
         
@@ -127,19 +116,14 @@ public class MergeButtonController : MonoBehaviour
                 if(appeared[i] == true) appearedCount++;
         if(appearedCount == appeared.Length) return true;
         
-        //connectedがなくなったら打ち切り
-        if(connected.Count == 0) return false;
-        
         //次の行き先をリストに追加
         List<int> contactParts = new List<int>();
         for(int i=0; i<connected.Count; i++){
             if(connected[i][0] == selected){
                 if(appeared[connected[i][1]] == false) contactParts.Add(connected[i][1]);
-                connected.RemoveAt(i);
             }
             else if(connected[i][1] == selected){
                 if(appeared[connected[i][0]] == false) contactParts.Add(connected[i][0]);
-                connected.RemoveAt(i);
             }
         }
         
@@ -152,9 +136,6 @@ public class MergeButtonController : MonoBehaviour
         }
         
         if(selected == 0){
-            for(int i=0; i<appeared.Length; i++)
-                Debug.Log(i+":"+appeared[i]);
-            
             for(int i=0; i<appeared.Length; i++)
                 if(appeared[i] == false)
                     return false;
