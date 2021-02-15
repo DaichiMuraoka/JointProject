@@ -4,6 +4,31 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
+    public EnemyMove enemyMove = null;
+
+    public FireManager fireManager = null;
+
+    public Controller controller = null;
+
+    private void Start()
+    {
+        enemyMove = GetComponent<EnemyMove>();
+        if(enemyMove == null)
+        {
+            Debug.LogError("EnemyMove is null.");
+        }
+        fireManager = GetComponent<FireManager>();
+        if (fireManager == null)
+        {
+            Debug.LogError("FireManager is null.");
+        }
+        controller = GetComponent<Controller>();
+        if (controller == null)
+        {
+            Debug.LogError("Controller is null.");
+        }
+    }
+
     private void Update()
     {
         if (GetComponent<Controller>().State == MOVE_STATE.FREEZE)
@@ -14,6 +39,4 @@ public class EnemyAttack : MonoBehaviour
     }
 
     public virtual void AttackPerFrame() { }
-
-    public virtual void CopyOtherEnemyAttack(EnemyAttack ea) { }
 }

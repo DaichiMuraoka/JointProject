@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEditor;
 
 public class Tank : MonoBehaviour
 {
@@ -22,31 +24,23 @@ public class Tank : MonoBehaviour
         }
     }
 
+    [SerializeField]
     private SIDE side = SIDE.NONE;
 
     public SIDE Side
     {
         get { return side; }
-        set
+    }
+
+    private void Start()
+    {
+        if(GetComponent<Controller>() == null)
         {
-            side = value;
-            name = value.ToString();
-            if (GetComponent<Controller>())
-            {
-                Destroy(GetComponent<Controller>());
-            }
-            if(value == SIDE.NONE)
-            {
-                Debug.LogError("side is none.");
-            }
-            else if(value == SIDE.PLAYER)
-            {
-                gameObject.AddComponent<PlayerController>();
-            }
-            else
-            {
-                gameObject.AddComponent<EnemyController>();
-            }
+            Debug.LogError("Controllerがついていません");
+        }
+        if(SceneManager.GetActiveScene().name == "Play")
+        {
+            AddTankList();
         }
     }
 
@@ -76,4 +70,73 @@ public class Tank : MonoBehaviour
         BattleManager.Instance.DeleteTankList(this);
         Destroy(gameObject);
     }
+
+    private void SetController()
+    {
+        if (side == SIDE.PLAYER)
+        {
+            if (GetComponent<PlayerController>() == null)
+            {
+                gameObject.AddComponent<PlayerController>();
+            }
+        }
+        else
+        {
+            PlayerController playerController = GetComponent<PlayerController>();
+            if (playerController != null)
+            {
+#if UNITY_EDITOR
+                EditorApplication.delayCall += () => DestroyImmediate(playerController);
+#else
+                Destroy(enemyController);
+#endif
+            }
+        }
+
+        if (side == SIDE.ENEMY)
+        {
+            if (GetComponent<EnemyController>() == null)
+            {
+                gameObject.AddComponent<EnemyController>();
+            }
+        }
+        else
+        {
+            EnemyController enemyController = GetComponent<EnemyController>();
+            if (enemyController != null)
+            {
+#if UNITY_EDITOR
+                EditorApplication.delayCall += () => DestroyImmediate(enemyController);
+#else
+                Destroy(enemyController);
+#endif
+            }
+            EnemyMove enemyMove = GetComponent<EnemyMove>();
+            if (enemyMove != null)
+            {
+#if UNITY_EDITOR
+                EditorApplication.delayCall += () => DestroyImmediate(enemyMove);
+#else
+                Destroy(enemyMove);
+#endif
+            }
+        }
+    }
+
+    private void OnValidate()
+    {
+        SetController();
+    }
+
+    private void AddTankList()
+    {
+        BattleManager.Instance.AddTankList(this);
+    }
+}
+
+public enum SIDE
+{
+    NONE,
+    PLAYER,
+    ENEMY
 }

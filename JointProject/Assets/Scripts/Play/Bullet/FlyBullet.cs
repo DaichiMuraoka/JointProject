@@ -7,7 +7,7 @@ public class FlyBullet : Bullet
     private void OnCollisionEnter(Collision collision)
     {
         string collisionTag = collision.gameObject.tag;
-        if (collisionTag == "Wall" || collisionTag == "Ground")
+        if (collisionTag == wallTag || collisionTag == groundTag)
         {
             Explosion();
         }

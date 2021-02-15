@@ -6,7 +6,7 @@ public class EnemyMove : MonoBehaviour
 {
     private void Update()
     {
-        if(GetComponent<Controller>().State == MOVE_STATE.FREEZE)
+        if(GetComponent<Controller>().State != MOVE_STATE.MOVE)
         {
             return;
         }
@@ -14,8 +14,6 @@ public class EnemyMove : MonoBehaviour
     }
 
     public virtual void MovePerFrame() { }
-
-    public virtual void CopyOtherEnemyMove(EnemyMove em) { }
 
     public bool Rotate(Vector3 destinationPos)
     {

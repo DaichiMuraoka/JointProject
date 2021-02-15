@@ -10,11 +10,6 @@ public class PlayerController : Controller
     [SerializeField]
     private KeyCode flyFireKey = KeyCode.F;
 
-    private void Start()
-    {
-        State = MOVE_STATE.MOVE;
-    }
-
     private void Update()
     {
         if (State == MOVE_STATE.FREEZE)

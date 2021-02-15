@@ -69,23 +69,47 @@ public class EnemyController : Controller
     public ENEMY_TARGET Target
     {
         get { return target; }
-
+        set
+        {
+            target = value;
+            EnemyAttack ea = GetComponent<EnemyAttack>();
+            if (value == ENEMY_TARGET.NEAREST)
+            {
+                if (!(ea is AttackNearest))
+                {
+                    if (ea != null)
+                    {
+#if UNITY_EDITOR
+                        EditorApplication.delayCall += () => DestroyImmediate(ea);
+#else
+                        Destroy(ea);
+#endif
+                    }
+                    gameObject.AddComponent<AttackNearest>();
+                }
+            }
+            else if (value == ENEMY_TARGET.RANDOM)
+            {
+                if (!(ea is AttackRandom))
+                {
+                    if (ea != null)
+                    {
+#if UNITY_EDITOR
+                        EditorApplication.delayCall += () => DestroyImmediate(ea);
+#else
+                        Destroy(ea);
+#endif
+                    }
+                    gameObject.AddComponent<AttackRandom>();
+                }
+            }
+        }
     }
     
     private void OnValidate()
     {
         Move = move;
-    }
-
-    public void CopyOtherEnemyController(EnemyController ec)
-    {
-        Move = ec.Move;
-        EnemyMove em = ec.gameObject.GetComponent<EnemyMove>();
-#if UNITY_EDITOR
-        EditorApplication.delayCall += () => GetComponent<EnemyMove>().CopyOtherEnemyMove(em);
-#else
-        GetComponent<EnemyMove>().CopyOtherEnemyMove(em);
-#endif
+        Target = target;
     }
 }
 

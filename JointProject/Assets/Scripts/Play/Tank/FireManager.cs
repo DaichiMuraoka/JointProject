@@ -28,6 +28,7 @@ public class FireManager : MonoBehaviour
     //発射
     public void Fire(FIRE_TYPE fireType)
     {
+        Debug.Log(gameObject.name + " fire!");
         Tank tank = GetComponent<Tank>();
         Vector3 muzzlePos = tank.GetMuzzle(fireType).position;  //発射位置取得
         Bullet bullet = Instantiate(GetBullet(fireType), muzzlePos, Quaternion.identity);   //砲弾生成

@@ -14,7 +14,6 @@ public class Patrol : EnemyMove
 
     private int currentDestination = 0;
 
-
     public override void MovePerFrame()
     {
         Vector3 destinationPos = route[currentDestination].position;
@@ -30,11 +29,5 @@ public class Patrol : EnemyMove
                 Debug.Log(currentDestination);
             }
         }
-    }
-
-    public override void CopyOtherEnemyMove(EnemyMove em)
-    {
-        Patrol pat = (Patrol)em;
-        route = pat.Route;
     }
 }

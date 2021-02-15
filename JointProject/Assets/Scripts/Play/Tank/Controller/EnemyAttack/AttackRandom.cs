@@ -8,6 +8,4 @@ public class AttackRandom : EnemyAttack
     {
 
     }
-
-    public override void CopyOtherEnemyAttack(EnemyAttack ea) { }
 }

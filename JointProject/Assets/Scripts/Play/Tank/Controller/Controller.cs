@@ -52,5 +52,6 @@ public class Controller : MonoBehaviour
 public enum MOVE_STATE
 {
     MOVE,
+    ATTACK,
     FREEZE
 }

@@ -8,7 +8,7 @@ public class NomalBullet : Bullet
     private void OnCollisionEnter(Collision collision)
     {
         string collisionTag = collision.gameObject.tag;
-        if (collisionTag == "Wall")
+        if (collisionTag == wallTag)
         {
             reboundCount++;
             if (reboundCount >= 2)
@@ -16,7 +16,7 @@ public class NomalBullet : Bullet
                 Destroy(gameObject);
             }
         }
-        if (collisionTag == "Ground")
+        if (collisionTag == groundTag)
         {
             Destroy(gameObject);
         }

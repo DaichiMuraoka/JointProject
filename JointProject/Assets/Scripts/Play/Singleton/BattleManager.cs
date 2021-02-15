@@ -25,6 +25,15 @@ public class BattleManager : Singleton<BattleManager>
         else if(side == SIDE.PLAYER)
         {
             playerList.Add(tank);
+            Vector3 pos = tank.transform.position;
+            //カメラを着ける
+            Instantiate
+                (
+                playerCameraPrefab,
+                new Vector3(pos.x, playerCameraPrefab.transform.position.y, pos.z - 3),
+                playerCameraPrefab.transform.rotation,
+                tank.transform
+                );
         }
         else
         {
@@ -44,6 +53,9 @@ public class BattleManager : Singleton<BattleManager>
         }
         CheckGameOver();
     }
+
+    [SerializeField]
+    Camera playerCameraPrefab = null;
 
     private void CheckGameOver()
     {
@@ -65,7 +77,11 @@ public class BattleManager : Singleton<BattleManager>
     private IEnumerator Test()
     {
         yield return new WaitForSeconds(3f);
-        foreach(Tank tank in enemyList)
+        foreach (Tank tank in playerList)
+        {
+            tank.GetComponent<Controller>().State = MOVE_STATE.MOVE;
+        }
+        foreach (Tank tank in enemyList)
         {
             tank.GetComponent<Controller>().State = MOVE_STATE.MOVE;
         }
@@ -73,6 +89,14 @@ public class BattleManager : Singleton<BattleManager>
 
     private void GameOver(SIDE side)
     {
+        foreach(Tank player in playerList)
+        {
+            player.GetComponent<Controller>().State = MOVE_STATE.FREEZE;
+        }
+        foreach(Tank enemy in enemyList)
+        {
+            enemy.GetComponent<Controller>().State = MOVE_STATE.FREEZE;
+        }
         if (side == SIDE.PLAYER)
         {
             Debug.Log("you lose.");
