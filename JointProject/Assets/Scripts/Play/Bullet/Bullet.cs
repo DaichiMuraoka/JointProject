@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour
 {
     public SIDE Side = SIDE.NONE;
 
-    public string wallTag = "Wall";
+    public List<string> wallTag = new List<string>();
 
     public string groundTag = "Ground";
 

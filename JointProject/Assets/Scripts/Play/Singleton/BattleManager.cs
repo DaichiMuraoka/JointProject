@@ -71,7 +71,7 @@ public class BattleManager : Singleton<BattleManager>
 
     private void Start()
     {
-        LoadMap();
+        LoadAllTanks();
         StartCoroutine(Test());
     }
 
@@ -88,18 +88,14 @@ public class BattleManager : Singleton<BattleManager>
         }
     }
 
-    [SerializeField]
-    private MapDeliverer mapDeliverer = null;
-
-    private void LoadMap()
+    private void LoadAllTanks()
     {
-        if(mapDeliverer.Map != null)
+        List<GameObject> tanks = new List<GameObject>();
+        tanks.AddRange(GameObject.FindGameObjectsWithTag("Player"));
+        tanks.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
+        foreach(GameObject tank in tanks)
         {
-            Instantiate(mapDeliverer.Map);
-        }
-        else
-        {
-            Debug.LogError("MapDeliverer.Map is null.");
+            tank.GetComponent<Tank>().AddTankList();
         }
     }
 

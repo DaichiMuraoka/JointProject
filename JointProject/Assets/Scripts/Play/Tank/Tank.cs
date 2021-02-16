@@ -34,15 +34,8 @@ public class Tank : MonoBehaviour
 
     private void Start()
     {
-        if(GetComponent<Controller>() == null)
-        {
-            Debug.LogError("Controllerがついていません");
-        }
-        if(SceneManager.GetActiveScene().name == "Play")
-        {
-            AddTankList();
-        }
     }
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -128,7 +121,7 @@ public class Tank : MonoBehaviour
         SetController();
     }
 
-    private void AddTankList()
+    public void AddTankList()
     {
         BattleManager.Instance.AddTankList(this);
     }

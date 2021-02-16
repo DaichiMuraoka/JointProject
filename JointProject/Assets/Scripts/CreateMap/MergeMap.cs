@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MergeMap : MonoBehaviour
 {
@@ -60,7 +61,15 @@ public class MergeMap : MonoBehaviour
             Destroy(part.GetComponent<BoxCollider>());
         }
 
+
+        //マップを残す
+        DontDestroyOnLoad(mapParts[0].transform.parent.gameObject);
+
+        /*
         //合成したマップをスクリプタブルに保存
         mapDeliverer.Map = mapParts[0].transform.parent.gameObject;
+        */
+        //シーン移動
+        SceneManager.LoadScene("Play");
     }
 }

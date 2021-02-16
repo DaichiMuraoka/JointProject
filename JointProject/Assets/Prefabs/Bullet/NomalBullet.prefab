@@ -123,3 +123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b401560978e58b04482cd16b214b9cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Side: 0
+  wallTag:
+  - Map_wall
+  - Map_innerWall
+  groundTag: Map_floor

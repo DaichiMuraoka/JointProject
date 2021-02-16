@@ -9,6 +9,9 @@ TagManager:
   - MapParts
   - Map_floor
   - Map_wall
+  - Map_innerWall
+  - MAST_Holder
+  - Enemy
   layers:
   - Default
   - TransparentFX

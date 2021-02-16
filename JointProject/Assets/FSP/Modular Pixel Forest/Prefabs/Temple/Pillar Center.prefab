@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: -7025367657984297930}
   m_Layer: 0
   m_Name: Pillar Center
-  m_TagString: Untagged
+  m_TagString: Map_innerWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
