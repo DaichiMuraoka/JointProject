@@ -71,6 +71,7 @@ public class BattleManager : Singleton<BattleManager>
 
     private void Start()
     {
+        LoadMap();
         StartCoroutine(Test());
     }
 
@@ -84,6 +85,21 @@ public class BattleManager : Singleton<BattleManager>
         foreach (Tank tank in enemyList)
         {
             tank.GetComponent<Controller>().State = MOVE_STATE.MOVE;
+        }
+    }
+
+    [SerializeField]
+    private MapDeliverer mapDeliverer = null;
+
+    private void LoadMap()
+    {
+        if(mapDeliverer.Map != null)
+        {
+            Instantiate(mapDeliverer.Map);
+        }
+        else
+        {
+            Debug.LogError("MapDeliverer.Map is null.");
         }
     }
 
