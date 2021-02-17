@@ -12,8 +12,6 @@ public class AttackNearest : EnemyAttack
 
     private float time = 0f;
 
-    private float fireCoolTime = 0f;
-
     public override void AttackPerFrame()
     {
         //一定間隔で回転→発射
@@ -28,7 +26,6 @@ public class AttackNearest : EnemyAttack
                 fireManager.Fire(fireType);
             }
         }
-        
     }
 
     private Vector3 GetNearestPlayerPos()

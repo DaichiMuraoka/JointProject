@@ -25,6 +25,7 @@ public class BattleManager : Singleton<BattleManager>
         else if(side == SIDE.PLAYER)
         {
             playerList.Add(tank);
+            tank.GetComponent<PlayerController>().id = playerList.Count;
             Vector3 pos = tank.transform.position;
             //カメラを着ける
             Instantiate
@@ -101,20 +102,20 @@ public class BattleManager : Singleton<BattleManager>
 
     private void GameOver(SIDE side)
     {
-        foreach(Tank player in playerList)
-        {
-            player.GetComponent<Controller>().State = MOVE_STATE.FREEZE;
-        }
-        foreach(Tank enemy in enemyList)
-        {
-            enemy.GetComponent<Controller>().State = MOVE_STATE.FREEZE;
-        }
         if (side == SIDE.PLAYER)
         {
+            foreach (Tank enemy in enemyList)
+            {
+                enemy.GetComponent<Controller>().State = MOVE_STATE.FREEZE;
+            }
             Debug.Log("you lose.");
         }
         else if(side == SIDE.ENEMY)
         {
+            foreach (Tank player in playerList)
+            {
+                player.GetComponent<Controller>().State = MOVE_STATE.FREEZE;
+            }
             Debug.Log("you win!");
         }
     }

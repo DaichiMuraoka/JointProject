@@ -10,6 +10,16 @@ public class PlayerController : Controller
     [SerializeField]
     private KeyCode flyFireKey = KeyCode.F;
 
+    public int id = 0;
+
+    private void Start()
+    {
+        if(id > ModeSettingLoader.Instance.ModeSetting.PlayerCount)
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
     private void Update()
     {
         if (State == MOVE_STATE.FREEZE)

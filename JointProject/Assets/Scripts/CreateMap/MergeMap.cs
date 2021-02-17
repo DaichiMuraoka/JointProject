@@ -7,9 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class MergeMap : MonoBehaviour
 {
-    [SerializeField]
-    private MapDeliverer mapDeliverer = null;
-
     public void OnClick()
     {
         //不要な壁を削除してマップを繋げる
@@ -65,10 +62,6 @@ public class MergeMap : MonoBehaviour
         //マップを残す
         DontDestroyOnLoad(mapParts[0].transform.parent.gameObject);
 
-        /*
-        //合成したマップをスクリプタブルに保存
-        mapDeliverer.Map = mapParts[0].transform.parent.gameObject;
-        */
         //シーン移動
         SceneManager.LoadScene("Play");
     }
