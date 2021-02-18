@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4998716810309693184}
   - component: {fileID: -6530539457931016324}
   - component: {fileID: 6969124623336920511}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TankPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,6 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nomalMuzzle: {fileID: 2232775358892972795}
   flyMuzzle: {fileID: 8690652610982467995}
+  side: 0
 --- !u!114 &6969124623336920511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,11 +142,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nomalBullet: {fileID: 5435265090469950774, guid: 3250fd80047883747aac0c2c9d547e63,
     type: 3}
-  nomalFireKey: 101
   nomalFireSpeed: 500
   flyBullet: {fileID: 765133466254268844, guid: ec1a25ffe0212214d8467fefc2e32dee,
     type: 3}
-  flyFireKey: 102
   flyFireSpeed: 150
   flyUpPower: 2
   coolTime: 1
@@ -158,7 +157,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2232775358892972795}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: NomalMuzzle
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -191,7 +190,7 @@ GameObject:
   - component: {fileID: 8536762372024435202}
   - component: {fileID: 4600197912697842437}
   - component: {fileID: 4716299048181551809}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -283,7 +282,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8690652610982467995}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FlyMuzzle
   m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}

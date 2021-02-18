@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 974847180608044736}
   - component: {fileID: 1664185574289823524}
   - component: {fileID: 765133466254268844}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FlyBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}

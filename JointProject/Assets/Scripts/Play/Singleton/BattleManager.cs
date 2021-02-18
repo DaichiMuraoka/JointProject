@@ -25,7 +25,7 @@ public class BattleManager : Singleton<BattleManager>
         else if(side == SIDE.PLAYER)
         {
             playerList.Add(tank);
-            tank.GetComponent<PlayerController>().id = playerList.Count;
+            tank.GetComponent<PlayerController>().ID = playerList.Count;
             Vector3 pos = tank.transform.position;
             //カメラを着ける
             Instantiate
