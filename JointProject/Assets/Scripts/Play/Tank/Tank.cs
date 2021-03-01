@@ -32,6 +32,14 @@ public class Tank : MonoBehaviour
         get { return side; }
     }
 
+    private Camera playerCamera = null;
+
+    public Camera Camera
+    {
+        get { return playerCamera; }
+        set { playerCamera = value; }
+    }
+
     private void Start()
     {
     }
