@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BattleManager : Singleton<BattleManager>
 {
@@ -24,17 +25,23 @@ public class BattleManager : Singleton<BattleManager>
         }
         else if(side == SIDE.PLAYER)
         {
-            playerList.Add(tank);
-            tank.GetComponent<PlayerController>().ID = playerList.Count;
+            tank.GetComponent<PlayerController>().ID = playerList.Count + 1;
             Vector3 pos = tank.transform.position;
-            //カメラを着ける
-            Instantiate
-                (
-                playerCameraPrefab,
-                new Vector3(pos.x, playerCameraPrefab.transform.position.y, pos.z - 3),
-                playerCameraPrefab.transform.rotation,
-                tank.transform
-                );
+            if(ModeSettingLoader.Instance.ModeSetting.PlayMode == PLAY_MODE.LOCAL)
+            {
+                //カメラを着ける
+                Vector3 cameraPos = new Vector3(pos.x, playerCameraPrefab.transform.position.y, pos.z - 3);
+                Quaternion rotate = playerCameraPrefab.transform.rotation;
+                Camera playerCamera = Instantiate(playerCameraPrefab, cameraPos, rotate, tank.transform);
+                tank.Camera = playerCamera;
+                //2人プレイ
+                if (playerList.Count == 1)
+                {
+                    playerList[0].Camera.rect = new Rect(0f, 0f, 0.5f, 1f);
+                    tank.Camera.rect = new Rect(0.5f, 0f, 1f, 1f);
+                }
+            }
+            playerList.Add(tank);
         }
         else
         {
@@ -78,15 +85,9 @@ public class BattleManager : Singleton<BattleManager>
 
     private IEnumerator Test()
     {
+        timeCounter.SetTime(60f);
         yield return new WaitForSeconds(3f);
-        foreach (Tank tank in playerList)
-        {
-            tank.GetComponent<Controller>().State = MOVE_STATE.MOVE;
-        }
-        foreach (Tank tank in enemyList)
-        {
-            tank.GetComponent<Controller>().State = MOVE_STATE.MOVE;
-        }
+        GameStart();
     }
 
     private void LoadAllTanks()
@@ -100,8 +101,12 @@ public class BattleManager : Singleton<BattleManager>
         }
     }
 
-    private void GameOver(SIDE side)
+    private bool gameOver = false;
+
+    public void GameOver(SIDE side)
     {
+        if (gameOver) return;
+        gameOver = true;
         if (side == SIDE.PLAYER)
         {
             foreach (Tank enemy in enemyList)
@@ -118,5 +123,33 @@ public class BattleManager : Singleton<BattleManager>
             }
             Debug.Log("you win!");
         }
+        announcePanel.GameOver(side);
+        StartCoroutine(LoadSceneCoroutine(3f));
+    }
+
+    [SerializeField]
+    private AnnouncePanel announcePanel = null;
+
+    [SerializeField]
+    private TimeCounter timeCounter = null;
+
+    private void GameStart()
+    {
+        announcePanel.GameStart();
+        timeCounter.StartCountDown();
+        foreach (Tank tank in playerList)
+        {
+            tank.GetComponent<Controller>().State = MOVE_STATE.MOVE;
+        }
+        foreach (Tank tank in enemyList)
+        {
+            tank.GetComponent<Controller>().State = MOVE_STATE.MOVE;
+        }
+    }
+
+    private IEnumerator LoadSceneCoroutine(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        SceneManager.LoadScene("LevelSelect");
     }
 }
