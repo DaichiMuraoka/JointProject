@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TransitionNextScene : MonoBehaviour
 {
+    [SerializeField] private AudioClip se = null;
     [SerializeField] private GameObject fadeCurtain = null;
     
     private AudioSource audioSource;
@@ -21,7 +22,8 @@ public class TransitionNextScene : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0)) {
             fadeTransition.StartFadeOut();
-            audioSource.PlayOneShot(audioSource.clip);
+            audioSource.Stop();
+            audioSource.PlayOneShot(se);
         }
     }
 }

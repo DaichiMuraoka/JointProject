@@ -47,6 +47,10 @@ public class LevelButtonGenerator : MonoBehaviour
         mapDeliverer.Map = levels[index];
         //フェード開始
         fadeTransition.StartFadeOut();
+        //BGMの削除
+        GameObject bgm = GameObject.Find("BGM");
+        Destroy(bgm);
+        
         audioSource.PlayOneShot(audioSource.clip);
     }
     

@@ -9,10 +9,19 @@ using UnityEngine.SceneManagement;
 public class LoadSceneButton : MonoBehaviour
 {
     [SerializeField] private string SceneName = null;
+    [SerializeField] private float waitTime = 0.2f;
     
     public void OnClick()
     {
-        //シーン移動
+        AudioSource audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource.PlayOneShot(audioSource.clip);
+        
+        StartCoroutine(NextScene());
+    }
+    
+    private IEnumerator NextScene()
+    {
+        yield return new WaitForSeconds(waitTime);
         SceneManager.LoadScene(SceneName);
     }
 }
