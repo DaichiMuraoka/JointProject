@@ -10,6 +10,7 @@ public class ButtonAnimation : MonoBehaviour
 {
     private Button button;
     private Animation anim;
+    private bool clicked = false;
     
     // Start is called before the first frame update
     void Start()
@@ -21,10 +22,18 @@ public class ButtonAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(button.interactable && anim.isPlaying == false){
-            anim.Play();
-        }else if(button.interactable == false && anim.isPlaying){
-            anim.Stop();
+        if(clicked == false){
+            if(button.interactable && anim.isPlaying == false){
+                anim.Play();
+            }else if(button.interactable == false && anim.isPlaying){
+                anim.Stop();
+            }
         }
+    }
+    
+    public void OnClick()
+    {
+        clicked = true;
+        anim.Stop();
     }
 }
