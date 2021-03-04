@@ -16,7 +16,8 @@ public class Patrol : EnemyMove
 
     public override void MovePerFrame()
     {
-        Vector3 destinationPos = route[currentDestination].position;
+        Vector3 dPos = route[currentDestination].position;
+        Vector3 destinationPos = new Vector3(dPos.x, transform.position.y, dPos.z);
         if (Rotate(destinationPos))
         {
             if (GoStraight(destinationPos))

@@ -150,6 +150,8 @@ public class BattleManager : Singleton<BattleManager>
     private IEnumerator LoadSceneCoroutine(float seconds)
     {
         yield return new WaitForSeconds(seconds);
+        GameObject mapparts = GameObject.FindGameObjectWithTag("MapParts");
+        Destroy(mapparts.transform.parent.gameObject);
         SceneManager.LoadScene("LevelSelect");
     }
 }

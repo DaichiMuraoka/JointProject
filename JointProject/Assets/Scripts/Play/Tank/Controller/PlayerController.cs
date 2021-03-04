@@ -20,9 +20,14 @@ public class PlayerController : Controller
                 return Input.GetAxis(horizontalKey[1]);
             }
         }
-        else
+        else if(horizontalKey.Count == 1)
         {
             return Input.GetAxis(horizontalKey[0]);
+        }
+        else
+        {
+            Debug.LogError("horizontalkey is none");
+            return 0f;
         }
     }
 
@@ -101,8 +106,9 @@ public class PlayerController : Controller
         }
     }
 
-    private void Start()
+    public override void Start()
     {
+        base.Start();
         PlayerTankAdjuster.Instance.Adjust(this);
     }
 

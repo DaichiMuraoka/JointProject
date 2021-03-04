@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
+    [HideInInspector]
     public EnemyMove enemyMove = null;
 
+    [HideInInspector]
     public FireManager fireManager = null;
 
+    [HideInInspector]
     public Controller controller = null;
 
     private void Start()

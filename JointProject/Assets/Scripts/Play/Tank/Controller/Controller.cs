@@ -10,7 +10,35 @@ public class Controller : MonoBehaviour
     public MOVE_STATE State
     {
         get { return state; }
-        set { state = value; }
+        set
+        {
+            StartCoroutine(SetAnimationParam(value));
+            state = value;
+        }
+    }
+
+    private IEnumerator SetAnimationParam(MOVE_STATE moveState)
+    {
+        if(moveState == MOVE_STATE.MOVE)
+        {
+            animator.SetBool("moving", true);
+        }
+        else if(moveState == MOVE_STATE.NOMAL_ATTACK)
+        {
+            animator.SetBool("fire_fwd", true);
+            yield return null;
+            animator.SetBool("fire_fwd", false);
+        }
+        else if(moveState == MOVE_STATE.FLY_ATTACK)
+        {
+            animator.SetBool("fire_uwd", true);
+            yield return null;
+            animator.SetBool("fire_uwd", false);
+        }
+        else if(moveState == MOVE_STATE.FREEZE)
+        {
+            animator.SetBool("moving", false);
+        }
     }
 
     [SerializeField]
@@ -31,9 +59,20 @@ public class Controller : MonoBehaviour
 
     private Rigidbody rb = null;
 
-    private void Start()
+    private Animator animator = null;
+
+    public virtual void Start()
     {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
+        if(animator == null)
+        {
+            Debug.LogError("animator is none");
+        }
+        else
+        {
+            Debug.Log("set anomator");
+        }
     }
 
     public void Freeze(float second)
@@ -52,6 +91,7 @@ public class Controller : MonoBehaviour
 public enum MOVE_STATE
 {
     MOVE,
-    ATTACK,
-    FREEZE
+    FREEZE,
+    NOMAL_ATTACK,
+    FLY_ATTACK
 }
