@@ -29,6 +29,7 @@ public class FireManager : MonoBehaviour
     public void Fire(FIRE_TYPE fireType)
     {
         Debug.Log(gameObject.name + " fire!");
+        SetState(fireType);
         Tank tank = GetComponent<Tank>();
         Vector3 muzzlePos = tank.GetMuzzle(fireType).position;  //発射位置取得
         Bullet bullet = Instantiate(GetBullet(fireType), muzzlePos, Quaternion.identity);   //砲弾生成
@@ -59,6 +60,18 @@ public class FireManager : MonoBehaviour
         else
         {
             return new Vector3(transform.forward.x / flyUpPower, flyUpPower, transform.forward.z / flyUpPower) * flyFireSpeed;
+        }
+    }
+
+    private void SetState(FIRE_TYPE fireType)
+    {
+        if (fireType == FIRE_TYPE.NOMAL)
+        {
+            GetComponent<Controller>().State = MOVE_STATE.NOMAL_ATTACK;
+        }
+        else
+        {
+            GetComponent<Controller>().State = MOVE_STATE.FLY_ATTACK;
         }
     }
 }

@@ -18,7 +18,7 @@ public class AttackNearest : EnemyAttack
         time += Time.deltaTime;
         if(time >= interval)
         {
-            controller.State = MOVE_STATE.ATTACK;
+            controller.State = MOVE_STATE.NOMAL_ATTACK;
             Vector3 targetPos = GetNearestPlayerPos();
             if (enemyMove.Rotate(targetPos))
             {

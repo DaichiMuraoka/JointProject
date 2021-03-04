@@ -36,7 +36,7 @@ public class TimeCounter : MonoBehaviour
         if(currentTime <= 0f)
         {
             counting = false;
-            BattleManager.Instance.GameOver(SIDE.ENEMY);
+            BattleManager.Instance.GameOver(SIDE.PLAYER);
         }
     }
 }
