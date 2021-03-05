@@ -353,9 +353,10 @@ GameObject:
   - component: {fileID: 712633766588353267}
   - component: {fileID: 3735014762607164151}
   - component: {fileID: 1127969938524414048}
+  - component: {fileID: 984646244729902689}
   m_Layer: 0
   m_Name: player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -466,7 +467,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nomalMuzzle: {fileID: 5374159724095824162}
   flyMuzzle: {fileID: 8965178052962385153}
-  side: 0
+  side: 1
 --- !u!114 &712633766588353267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -520,6 +521,21 @@ CapsuleCollider:
   m_Height: 0.045437742
   m_Direction: 1
   m_Center: {x: 0, y: 0.01939611, z: -0.008}
+--- !u!114 &984646244729902689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7791304646425738207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63023b2904ab89f45bc9263f60cb2249, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 1
+  moveSpeed: 5
+  rotationSpeed: 200
 --- !u!1 &8330740475300640958
 GameObject:
   m_ObjectHideFlags: 0

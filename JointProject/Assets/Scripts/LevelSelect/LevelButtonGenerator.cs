@@ -45,6 +45,7 @@ public class LevelButtonGenerator : MonoBehaviour
     void OnClickLevelButton(int index){
         //デリバラーにレベルをセット
         mapDeliverer.Map = levels[index];
+        mapDeliverer.Level = index + 1;
         //フェード開始
         fadeTransition.StartFadeOut();
         //BGMの削除
