@@ -11,6 +11,5 @@ public class DecidePlayerCountButton : MonoBehaviour
     public void OnClick()
     {
         ModeSettingLoader.Instance.ModeSetting.PlayerCount = playerCount;
-        SceneManager.LoadScene("LevelSelect");
     }
 }

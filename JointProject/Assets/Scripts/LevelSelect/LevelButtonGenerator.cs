@@ -17,8 +17,14 @@ public class LevelButtonGenerator : MonoBehaviour
     [SerializeField] private GameObject content = null;
     [SerializeField] private GameObject levelButton = null;
     [SerializeField] private MapDeliverer mapDeliverer = null;
+    [SerializeField] private GameObject fadeCurtain = null;
+    
+    private AudioSource audioSource;
+    private FadeTransition fadeTransition;
     
     void Start(){
+        audioSource = gameObject.GetComponent<AudioSource>();
+        fadeTransition = fadeCurtain.GetComponent<FadeTransition>();
         
         for(int i = 0; i < levels.Length; i++) {
             //プレハブからボタンを生成
@@ -39,7 +45,13 @@ public class LevelButtonGenerator : MonoBehaviour
     void OnClickLevelButton(int index){
         //デリバラーにレベルをセット
         mapDeliverer.Map = levels[index];
-        //シーン遷移
-        SceneManager.LoadScene("CreateMap");
+        //フェード開始
+        fadeTransition.StartFadeOut();
+        //BGMの削除
+        GameObject bgm = GameObject.Find("BGM");
+        Destroy(bgm);
+        
+        audioSource.PlayOneShot(audioSource.clip);
     }
+    
 }

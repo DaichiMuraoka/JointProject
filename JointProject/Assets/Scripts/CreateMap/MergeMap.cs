@@ -3,10 +3,11 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MergeMap : MonoBehaviour
 {
+    [SerializeField] private GameObject effect = null;
+    
     public void OnClick()
     {
         //不要な壁を削除してマップを繋げる
@@ -47,6 +48,8 @@ public class MergeMap : MonoBehaviour
             //接面が8未満＝端のブロック
             //端のブロックでないなら消す
             if(blockSum == 8){
+                //破壊エフェクトを生成
+                Instantiate(effect, wall.transform.position, Quaternion.identity);
                 Destroy(wall);
             }
         }
@@ -58,11 +61,7 @@ public class MergeMap : MonoBehaviour
             Destroy(part.GetComponent<BoxCollider>());
         }
 
-
         //マップを残す
         DontDestroyOnLoad(mapParts[0].transform.parent.gameObject);
-
-        //シーン移動
-        SceneManager.LoadScene("Play");
     }
 }

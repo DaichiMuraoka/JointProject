@@ -31,11 +31,7 @@ public class FadeTransition : MonoBehaviour
         }
         else
         {
-            //最初から透明に
-            float r = image.color.r;
-            float g = image.color.g;
-            float b = image.color.b;
-            image.color = new Color(r, g, b, 0.0F);
+            HideImage();
         }
     }
 
@@ -43,7 +39,7 @@ public class FadeTransition : MonoBehaviour
     void Update()
     {
         if(nextSceneFlag && anim.IsPlaying(anim.clip.name) == false){
-            //SceneManager.LoadScene(nextSceneName);
+            SceneManager.LoadScene(nextSceneName);
         }
     }
     
@@ -57,5 +53,15 @@ public class FadeTransition : MonoBehaviour
         anim.Play();
         
         nextSceneFlag = true;
+    }
+    
+    //imageを切り替え
+    public void HideImage()
+    {
+        if(image.enabled){
+            image.enabled = false;
+        }else{
+            image.enabled = true;
+        }
     }
 }
