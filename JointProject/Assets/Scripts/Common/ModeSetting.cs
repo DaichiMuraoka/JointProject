@@ -26,7 +26,7 @@ public class ModeSetting : ScriptableObject
 
 public enum PLAY_MODE
 {
-    TUTORIAL,
     LOCAL,
-    ONLINE
+    ONLINE,
+    TUTORIAL
 }

@@ -43,6 +43,7 @@ public class BattleManager : Singleton<BattleManager>
                 }
             }
             playerList.Add(tank);
+            Debug.Log(tank.name + "added.");
         }
         else
         {
@@ -98,6 +99,7 @@ public class BattleManager : Singleton<BattleManager>
         tanks.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
         foreach(GameObject tank in tanks)
         {
+            Debug.Log(tank.name);
             tank.GetComponent<Tank>().AddTankList();
         }
     }

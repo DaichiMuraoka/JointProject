@@ -214,7 +214,7 @@ MonoBehaviour:
   enemyList: []
   playerCameraPrefab: {fileID: 1743564322225962093, guid: 0579c350783be7c408ad40518b779dd4,
     type: 3}
-  mapDeliverer: {fileID: 0}
+  mapDeliverer: {fileID: 11400000, guid: 384b84fee2f5d8747b9d0948a15d0bb2, type: 2}
   announcePanel: {fileID: 1891647802}
   timeCounter: {fileID: 817675205}
 --- !u!1 &817675201
@@ -813,8 +813,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1923552516}
+  - component: {fileID: 1923552517}
   m_Layer: 0
-  m_Name: DataManager
+  m_Name: SaveDataManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -834,6 +835,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1923552517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923552515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3970099213181c4db48d26a24daa790, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestrayOnLoad: 0
 --- !u!1 &2048869145
 GameObject:
   m_ObjectHideFlags: 0
