@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 public class BattleManager : Singleton<BattleManager>
 {
@@ -121,11 +122,18 @@ public class BattleManager : Singleton<BattleManager>
             {
                 player.GetComponent<Controller>().State = MOVE_STATE.FREEZE;
             }
+            int level = mapDeliverer.Level;
+            SaveDataManager.Instance.LevelClear(level);
             Debug.Log("you win!");
         }
         announcePanel.GameOver(side);
         StartCoroutine(LoadSceneCoroutine(3f));
     }
+
+    [SerializeField]
+    private MapDeliverer mapDeliverer = null;
+
+    
 
     [SerializeField]
     private AnnouncePanel announcePanel = null;
@@ -155,3 +163,5 @@ public class BattleManager : Singleton<BattleManager>
         SceneManager.LoadScene("LevelSelect");
     }
 }
+
+
