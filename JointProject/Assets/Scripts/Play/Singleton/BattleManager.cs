@@ -129,7 +129,7 @@ public class BattleManager : Singleton<BattleManager>
             Debug.Log("you win!");
         }
         announcePanel.GameOver(side);
-        StartCoroutine(LoadSceneCoroutine(3f));
+        playButtonPanel.Open(side);
     }
 
     [SerializeField]
@@ -139,6 +139,9 @@ public class BattleManager : Singleton<BattleManager>
 
     [SerializeField]
     private AnnouncePanel announcePanel = null;
+
+    [SerializeField]
+    private PlayButtonPanel playButtonPanel = null;
 
     [SerializeField]
     private TimeCounter timeCounter = null;
@@ -157,13 +160,31 @@ public class BattleManager : Singleton<BattleManager>
         }
     }
 
-    private IEnumerator LoadSceneCoroutine(float seconds)
+    public void LoadScene(PLAY_TO_NEXT nextScene)
     {
-        yield return new WaitForSeconds(seconds);
+        string sceneName;
+        if(nextScene == PLAY_TO_NEXT.LEVELSELECT)
+        {
+            sceneName = "LevelSelect";
+        }
+        else if(nextScene == PLAY_TO_NEXT.NEXTLEVEL)
+        {
+            sceneName = "CreateMap";
+            mapDeliverer.Level++;
+        }
+        else
+        {
+            sceneName = "CreateMap";
+        }
         GameObject mapparts = GameObject.FindGameObjectWithTag("MapParts");
         Destroy(mapparts.transform.parent.gameObject);
-        SceneManager.LoadScene("LevelSelect");
+        SceneManager.LoadScene(sceneName);
     }
 }
 
-
+public enum PLAY_TO_NEXT
+{
+    LEVELSELECT,
+    NEXTLEVEL,
+    RETRY
+}
