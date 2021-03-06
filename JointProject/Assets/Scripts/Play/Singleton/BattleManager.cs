@@ -28,7 +28,7 @@ public class BattleManager : Singleton<BattleManager>
         {
             tank.GetComponent<PlayerController>().ID = playerList.Count + 1;
             Vector3 pos = tank.transform.position;
-            if(ModeSettingLoader.Instance.ModeSetting.PlayMode == PLAY_MODE.LOCAL)
+            if(ModeSettingLoader.Instance.ModeSetting.PlayMode != PLAY_MODE.ONLINE)
             {
                 //カメラを着ける
                 Vector3 cameraPos = new Vector3(pos.x, playerCameraPrefab.transform.position.y, pos.z - 3);

@@ -61,6 +61,11 @@ public class Controller : MonoBehaviour
 
     private Animator animator = null;
 
+    public Animator Animator
+    {
+        get { return animator; }
+    }
+
     public virtual void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -82,9 +87,12 @@ public class Controller : MonoBehaviour
 
     private IEnumerator FreezeCoroutine(float second)
     {
-        state = MOVE_STATE.FREEZE;
-        yield return new WaitForSeconds(second);
-        state = MOVE_STATE.MOVE;
+        if(state != MOVE_STATE.FREEZE)
+        {
+            state = MOVE_STATE.FREEZE;
+            yield return new WaitForSeconds(second);
+            state = MOVE_STATE.MOVE;
+        }
     }
 }
 

@@ -56,19 +56,26 @@ public class Tank : MonoBehaviour
         {
             if (Side == SIDE.ENEMY && bullet.Side == SIDE.PLAYER)
             {
-                Explosion(collision);
+                StartCoroutine(Explosion(collision));
             }
             else if (Side == SIDE.PLAYER && bullet.Side == SIDE.ENEMY)
             {
-                Explosion(collision);
+                StartCoroutine(Explosion(collision));
             }
         }
     }
 
-    private void Explosion(Collision collision)
+    private IEnumerator Explosion(Collision collision)
     {
+        Debug.Log(name + " is explosion");
+        Controller controller = GetComponent<Controller>();
+        controller.State = MOVE_STATE.FREEZE;
         collision.gameObject.GetComponent<Bullet>().Explosion();
         BattleManager.Instance.DeleteTankList(this);
+        yield return null;
+        Animator animator = controller.Animator;
+        animator.SetBool("dead", true);
+        yield return new WaitForSeconds(3f);
         Destroy(gameObject);
     }
 
