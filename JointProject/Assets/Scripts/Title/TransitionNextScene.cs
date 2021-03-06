@@ -1,9 +1,13 @@
-﻿using System.Collections;
+﻿//kanoko
+//SEを鳴らして、フェードインを開始する
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TransitionNextScene : MonoBehaviour
 {
+    [SerializeField] private bool ClickAllDisplay = false;
     [SerializeField] private AudioClip se = null;
     [SerializeField] private GameObject fadeCurtain = null;
     
@@ -20,10 +24,15 @@ public class TransitionNextScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) {
-            fadeTransition.StartFadeOut();
-            audioSource.Stop();
-            audioSource.PlayOneShot(se);
+        if (ClickAllDisplay && Input.GetMouseButtonDown(0)) {
+            StartFadeIn();
         }
+    }
+    
+    public void StartFadeIn()
+    {
+        fadeTransition.StartFadeOut();
+        audioSource.Stop();
+        audioSource.PlayOneShot(se);
     }
 }
