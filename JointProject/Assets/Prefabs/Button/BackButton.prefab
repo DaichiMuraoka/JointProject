@@ -304,7 +304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SceneName: Home
-  waitTime: 0.2
+  waitTime: 0.1
 --- !u!114 &456743180564782639
 MonoBehaviour:
   m_ObjectHideFlags: 0
