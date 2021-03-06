@@ -68,9 +68,26 @@ public class PlayerController : Controller
         set
         {
             id = value;
-            if(ModeSettingLoader.Instance.ModeSetting.PlayMode == PLAY_MODE.LOCAL)
+            if(ModeSettingLoader.Instance.ModeSetting.PlayMode == PLAY_MODE.LOCAL && ModeSettingLoader.Instance.ModeSetting.PlayerCount == 2)
             {
-                if(ModeSettingLoader.Instance.ModeSetting.PlayerCount == 1)
+                if (id == 1)
+                {
+                    horizontalKey.Add(horizontalMainKey);
+                    verticalKey.Add(verticalMainKey);
+                    nomalFireKey.Add(nomalFireMainKey);
+                    flyFireKey.Add(flyFireMainKey);
+                }
+                else if (id == 2)
+                {
+                    horizontalKey.Add(horizontalSubKey);
+                    verticalKey.Add(verticalSubKey);
+                    nomalFireKey.Add(nomalFireSubKey);
+                    flyFireKey.Add(flyFireSubKey);
+                }
+            }
+            else
+            {
+                if (ModeSettingLoader.Instance.ModeSetting.PlayerCount == 1)
                 {
                     horizontalKey.Add(horizontalMainKey);
                     horizontalKey.Add(horizontalSubKey);
@@ -81,27 +98,6 @@ public class PlayerController : Controller
                     flyFireKey.Add(flyFireMainKey);
                     flyFireKey.Add(flyFireSubKey);
                 }
-                else
-                {
-                    if (id == 1)
-                    {
-                        horizontalKey.Add(horizontalMainKey);
-                        verticalKey.Add(verticalMainKey);
-                        nomalFireKey.Add(nomalFireMainKey);
-                        flyFireKey.Add(flyFireMainKey);
-                    }
-                    else if (id == 2)
-                    {
-                        horizontalKey.Add(horizontalSubKey);
-                        verticalKey.Add(verticalSubKey);
-                        nomalFireKey.Add(nomalFireSubKey);
-                        flyFireKey.Add(flyFireSubKey);
-                    }
-                }
-            }
-            else
-            {
-                //オンラインでの動作
             }
         }
     }

@@ -7,15 +7,26 @@ public class PlayButtonPanel : Panel
     [SerializeField]
     private RetryOrNextButton retryOrNextButton = null;
 
+    [SerializeField]
+    private GameObject TutorialRoot = null;
+
     private void Start()
     {
         SetActive(false);
+        TutorialRoot.SetActive(false);
     }
 
     public void Open(SIDE side)
     {
-        SetActive(true);
-        retryOrNextButton.Init(side);
+        if(ModeSettingLoader.Instance.ModeSetting.PlayMode == PLAY_MODE.TUTORIAL)
+        {
+            TutorialRoot.SetActive(true);
+        }
+        else
+        {
+            SetActive(true);
+            retryOrNextButton.Init(side);
+        }
     }
 
     public void OnClickRetry()
@@ -31,5 +42,10 @@ public class PlayButtonPanel : Panel
     public void OnClickLevel()
     {
         BattleManager.Instance.LoadScene(PLAY_TO_NEXT.LEVELSELECT);
+    }
+
+    public void OnClickHome()
+    {
+        BattleManager.Instance.LoadScene(PLAY_TO_NEXT.HOME);
     }
 }

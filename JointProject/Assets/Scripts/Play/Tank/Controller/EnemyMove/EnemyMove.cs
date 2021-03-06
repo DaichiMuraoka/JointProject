@@ -6,14 +6,16 @@ public class EnemyMove : MonoBehaviour
 {
     private void Update()
     {
-        if(GetComponent<Controller>().State != MOVE_STATE.MOVE)
+        if (GetComponent<Controller>().State == MOVE_STATE.MOVE)
         {
-            return;
+            MovePerFrame();
         }
-        MovePerFrame();
     }
 
-    public virtual void MovePerFrame() { }
+    public virtual void MovePerFrame()
+    {
+        
+    }
 
     public bool Rotate(Vector3 destinationPos)
     {

@@ -8,11 +8,13 @@ public class AnnouncePanel : Panel
     [SerializeField]
     private TextMeshProUGUI announcement = null;
 
+    [SerializeField]
+    private GameObject gameClearPrefab = null;
+
+    [SerializeField]
+    private GameObject gameoverPrefab = null;
+
     private string gameStart = "GAME START!";
-
-    private string win = "WIN!!";
-
-    private string lose = "LOSE...";
 
     private void Start()
     {
@@ -28,13 +30,14 @@ public class AnnouncePanel : Panel
 
     public void GameOver(SIDE side)
     {
+        announcement.text = "";
         if (side == SIDE.PLAYER)
         {
-            announcement.text = lose;
+            Instantiate(gameoverPrefab, Root);
         }
         else if(side == SIDE.ENEMY)
         {
-            announcement.text = win;
+            Instantiate(gameClearPrefab, Root);
         }
         SetActive(true);
     }

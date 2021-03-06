@@ -38,8 +38,11 @@ public class Controller : MonoBehaviour
         else if(moveState == MOVE_STATE.FREEZE)
         {
             animator.SetBool("moving", false);
+            fleezeCount++;
         }
     }
+
+    private int fleezeCount = 0;
 
     [SerializeField]
     private float moveSpeed = 5f;
@@ -87,11 +90,16 @@ public class Controller : MonoBehaviour
 
     private IEnumerator FreezeCoroutine(float second)
     {
-        if(state != MOVE_STATE.FREEZE)
+        if(State != MOVE_STATE.FREEZE)
         {
-            state = MOVE_STATE.FREEZE;
+            fleezeCount = 0;
+            State = MOVE_STATE.FREEZE;
             yield return new WaitForSeconds(second);
-            state = MOVE_STATE.MOVE;
+            if(fleezeCount <= 1)
+            {
+                Debug.Log("re move");
+                State = MOVE_STATE.MOVE;
+            }
         }
     }
 }

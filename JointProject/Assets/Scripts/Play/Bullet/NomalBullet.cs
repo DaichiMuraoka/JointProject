@@ -25,13 +25,13 @@ public class NomalBullet : Bullet
             reboundCount++;
             if (reboundCount >= 2 && hitPosition != transform.position)
             {
-                Destroy(gameObject);
+                Explosion();
             }
             hitPosition = transform.position;
         }
         if (collisionTag == groundTag)
         {
-            Destroy(gameObject);
+            Explosion();
         }
     }
 }

@@ -71,13 +71,12 @@ GameObject:
   m_Component:
   - component: {fileID: 3413256437474007718}
   - component: {fileID: 7122752996457440607}
-  - component: {fileID: -8831505913586183765}
   - component: {fileID: 6223132361197362906}
   - component: {fileID: 385123589990298802}
   - component: {fileID: 2427293169979286999}
   - component: {fileID: 1939353054729913487}
-  - component: {fileID: 8102037779114809495}
   - component: {fileID: 8363429707959835410}
+  - component: {fileID: 7920784033524898395}
   m_Layer: 0
   m_Name: yusha
   m_TagString: Enemy
@@ -168,20 +167,6 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.0025000004, y: -0.0000074547715, z: 0.0064007267}
     m_Extent: {x: 0.021499999, y: 0.01100822, z: 0.02600459}
   m_DirtyAABB: 0
---- !u!136 &-8831505913586183765
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2600127338536779804}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.021499999
-  m_Height: 0.052019823
-  m_Direction: 1
-  m_Center: {x: 0.008499998, y: 0.026000727, z: -0.008995647}
 --- !u!54 &6223132361197362906
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -252,23 +237,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8102037779114809495
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2600127338536779804}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8434a7741e608344d9cec8aa632ff7ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyMove: {fileID: 0}
-  fireManager: {fileID: 0}
-  controller: {fileID: 0}
-  fireType: 0
-  interval: 2
 --- !u!114 &8363429707959835410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,6 +254,20 @@ MonoBehaviour:
   rotationSpeed: 200
   move: 0
   target: 0
+--- !u!136 &7920784033524898395
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2600127338536779804}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.011
+  m_Height: 0.052019823
+  m_Direction: 1
+  m_Center: {x: 0.00599, y: 0.02600073, z: -0.008995647}
 --- !u!1 &3131390185617348178
 GameObject:
   m_ObjectHideFlags: 0

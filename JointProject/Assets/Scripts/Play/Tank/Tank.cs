@@ -57,10 +57,12 @@ public class Tank : MonoBehaviour
             if (Side == SIDE.ENEMY && bullet.Side == SIDE.PLAYER)
             {
                 StartCoroutine(Explosion(collision));
+                bullet.Explosion();
             }
             else if (Side == SIDE.PLAYER && bullet.Side == SIDE.ENEMY)
             {
                 StartCoroutine(Explosion(collision));
+                bullet.Explosion();
             }
         }
     }

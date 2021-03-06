@@ -27,13 +27,18 @@ public class BattleManager : Singleton<BattleManager>
         else if(side == SIDE.PLAYER)
         {
             tank.GetComponent<PlayerController>().ID = playerList.Count + 1;
-            Vector3 pos = tank.transform.position;
             if(ModeSettingLoader.Instance.ModeSetting.PlayMode != PLAY_MODE.ONLINE)
             {
+                Vector3 pos = tank.transform.position;
+                Vector3 forward = tank.transform.forward;
+                Vector3 cameraPosXZ = pos - 3f * forward;
                 //カメラを着ける
-                Vector3 cameraPos = new Vector3(pos.x, playerCameraPrefab.transform.position.y, pos.z - 3);
-                Quaternion rotate = playerCameraPrefab.transform.rotation;
-                Camera playerCamera = Instantiate(playerCameraPrefab, cameraPos, rotate, tank.transform);
+                Vector3 cameraPos = new Vector3(cameraPosXZ.x,
+                    playerCameraPrefab.transform.position.y,
+                    cameraPosXZ.z);
+                Camera playerCamera = Instantiate(playerCameraPrefab, cameraPos, Quaternion.identity, tank.transform);
+                Vector3 lookPos = pos + 3f * forward;
+                playerCamera.transform.LookAt(lookPos);
                 tank.Camera = playerCamera;
                 //2人プレイ
                 if (playerList.Count == 1)
@@ -114,6 +119,7 @@ public class BattleManager : Singleton<BattleManager>
         {
             foreach (Tank enemy in enemyList)
             {
+                Debug.Log(enemy.name + " freeze");
                 enemy.GetComponent<Controller>().State = MOVE_STATE.FREEZE;
             }
             Debug.Log("you lose.");
@@ -122,12 +128,15 @@ public class BattleManager : Singleton<BattleManager>
         {
             foreach (Tank player in playerList)
             {
+                Debug.Log(player.name + " freeze");
                 player.GetComponent<Controller>().State = MOVE_STATE.FREEZE;
+                player.gameObject.GetComponent<Animator>().SetBool("win", true);
             }
             int level = mapDeliverer.Level;
             SaveDataManager.Instance.LevelClear(level);
             Debug.Log("you win!");
         }
+        howToPanel.Close();
         announcePanel.GameOver(side);
         playButtonPanel.Open(side);
     }
@@ -135,7 +144,8 @@ public class BattleManager : Singleton<BattleManager>
     [SerializeField]
     private MapDeliverer mapDeliverer = null;
 
-    
+    [SerializeField]
+    private HowToPanel howToPanel = null;
 
     [SerializeField]
     private AnnouncePanel announcePanel = null;
@@ -149,6 +159,14 @@ public class BattleManager : Singleton<BattleManager>
     private void GameStart()
     {
         announcePanel.GameStart();
+        bool isLocalCount2 = false;
+        int playerCount = ModeSettingLoader.Instance.ModeSetting.PlayerCount;
+        PLAY_MODE mode = ModeSettingLoader.Instance.ModeSetting.PlayMode;
+        if (playerCount == 2 && mode == PLAY_MODE.LOCAL)
+        {
+            isLocalCount2 = true;
+        }
+        howToPanel.Open(isLocalCount2);
         timeCounter.StartCountDown();
         foreach (Tank tank in playerList)
         {
@@ -172,9 +190,13 @@ public class BattleManager : Singleton<BattleManager>
             sceneName = "CreateMap";
             mapDeliverer.Level++;
         }
-        else
+        else if(nextScene == PLAY_TO_NEXT.RETRY)
         {
             sceneName = "CreateMap";
+        }
+        else
+        {
+            sceneName = "Home";
         }
         GameObject mapparts = GameObject.FindGameObjectWithTag("MapParts");
         Destroy(mapparts.transform.parent.gameObject);
@@ -186,5 +208,6 @@ public enum PLAY_TO_NEXT
 {
     LEVELSELECT,
     NEXTLEVEL,
-    RETRY
+    RETRY,
+    HOME
 }

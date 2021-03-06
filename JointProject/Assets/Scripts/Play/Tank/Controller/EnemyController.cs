@@ -45,7 +45,7 @@ public class EnemyController : Controller
                     gameObject.AddComponent<Chase>();
                 }
             }
-            else
+            else if(value == ENEMY_MOVE.WAIT)
             {
                 if (!(em is Wait))
                 {
@@ -58,6 +58,17 @@ public class EnemyController : Controller
 #endif
                     }
                     gameObject.AddComponent<Wait>();
+                }
+            }
+            else
+            {
+                if (em != null)
+                {
+#if UNITY_EDITOR
+                    EditorApplication.delayCall += () => DestroyImmediate(em, true);
+#else
+                    Destroy(em);
+#endif
                 }
             }
         }
@@ -103,6 +114,27 @@ public class EnemyController : Controller
                     gameObject.AddComponent<AttackRandom>();
                 }
             }
+            else
+            {
+                if (ea != null)
+                {
+#if UNITY_EDITOR
+                    EditorApplication.delayCall += () => {
+                        DestroyImmediate(ea, true);
+                        EditorApplication.delayCall += () =>
+                        {
+                            EnemyAttack ea2 = GetComponent<EnemyAttack>();
+                            if (ea2 != null)
+                            {
+                                Target = ENEMY_TARGET.NONE;
+                            }
+                        };
+                    };
+#else
+                    Destroy(ea);
+#endif
+                }
+            }
         }
     }
     
@@ -115,6 +147,7 @@ public class EnemyController : Controller
 
 public enum ENEMY_MOVE
 {
+    NONE,
 	PATROL,
     CHASE,
 	WAIT
@@ -122,6 +155,7 @@ public enum ENEMY_MOVE
 
 public enum ENEMY_TARGET
 {
+    NONE,
     NEAREST,
     RANDOM
 }
