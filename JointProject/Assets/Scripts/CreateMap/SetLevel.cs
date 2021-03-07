@@ -1,5 +1,5 @@
 ﻿//kanoko
-//スクリプタブルオブジェクトからレベルを読み出しシーンに配置する。
+//mapDelivererからレベルを読み出しシーンに配置する。
 
 using System.Collections;
 using System.Collections.Generic;

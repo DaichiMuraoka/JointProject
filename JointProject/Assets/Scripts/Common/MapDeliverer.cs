@@ -5,14 +5,18 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "MapDeliverer")]
 public class MapDeliverer : ScriptableObject
 {
-    private GameObject map = null;
+    [SerializeField] private GameObject[] maps = null;
 
     private int level = 0;
 
     public GameObject Map
     {
-        get { return map; }
-        set { map = value; }
+        get { return maps[level]; }
+    }
+    
+    public int LevelMax
+    {
+        get { return maps.Length; }
     }
 
     public int Level

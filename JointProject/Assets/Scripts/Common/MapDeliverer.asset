@@ -12,3 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4a572d5f736de4458a292afa0e03318, type: 3}
   m_Name: MapDeliverer
   m_EditorClassIdentifier: 
+  maps:
+  - {fileID: 4684315434642066405, guid: bd6b5d990bf8b734585b5d80d0db4c0e, type: 3}
+  - {fileID: 136176261795758173, guid: 95e2fe9fa28acb54d9011dfe750fb8b7, type: 3}
+  - {fileID: 2942923273892293407, guid: b10f12b7a8cec654480dde816f3b7850, type: 3}
+  - {fileID: 5411117298609720381, guid: 9f9ffdc093bffb64da9c353fda6efdc8, type: 3}
