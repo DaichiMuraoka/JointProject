@@ -19,7 +19,10 @@ public class RetryOrNextButton : MonoBehaviour
         }
         else
         {
-            Next();
+            if (!BattleManager.Instance.IsLevelMax)
+            {
+                Next();
+            }
         }
     }
 

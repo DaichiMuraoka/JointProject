@@ -69,6 +69,7 @@ public class Tank : MonoBehaviour
 
     private IEnumerator Explosion(Collision collision)
     {
+        GetComponent<AudioSource>().Play();
         Debug.Log(name + " is explosion");
         Controller controller = GetComponent<Controller>();
         controller.State = MOVE_STATE.FREEZE;

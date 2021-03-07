@@ -144,6 +144,14 @@ public class BattleManager : Singleton<BattleManager>
     [SerializeField]
     private MapDeliverer mapDeliverer = null;
 
+    public bool IsLevelMax
+    {
+        get
+        {
+            return mapDeliverer.Level == mapDeliverer.LevelMax;
+        }
+    }
+
     [SerializeField]
     private HowToPanel howToPanel = null;
 
