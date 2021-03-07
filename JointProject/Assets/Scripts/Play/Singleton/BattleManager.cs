@@ -136,6 +136,7 @@ public class BattleManager : Singleton<BattleManager>
             SaveDataManager.Instance.LevelClear(level);
             Debug.Log("you win!");
         }
+        timeCounter.Stop();
         howToPanel.Close();
         announcePanel.GameOver(side);
         playButtonPanel.Open(side);

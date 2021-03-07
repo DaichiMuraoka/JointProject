@@ -21,6 +21,11 @@ public class TimeCounter : MonoBehaviour
         counting = true;
     }
 
+    public void Stop()
+    {
+        counting = false;
+    }
+
     private void Start()
     {
         text = GetComponent<TextMeshProUGUI>();
