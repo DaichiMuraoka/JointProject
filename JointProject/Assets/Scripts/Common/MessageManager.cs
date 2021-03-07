@@ -17,7 +17,7 @@ public class MessageManager : MonoBehaviour
     private bool input = false; //入力を受け付けるか
     private AudioSource audioSource;
     
-    void Start()
+    void Awake()
     {
         //オブジェクトを取得
         messages = new GameObject[gameObject.transform.childCount];
@@ -41,21 +41,20 @@ public class MessageManager : MonoBehaviour
         
     }
     
-    
+    //メッセージ表示開始
     public void StartMessage(float time)
     {
-        StartCoroutine(InitSetting(time));
-    }
-    
-    //初期設定
-    public IEnumerator InitSetting(float time)
-    {
-        yield return new WaitForSeconds(time);
-        
         foreach(GameObject obj in invailidObjects)
         {
             obj.SetActive(false);
         }
+        StartCoroutine(InitSetting(time));
+    }
+    
+    //メッセージ表示開始コルーチン
+    public IEnumerator InitSetting(float time)
+    {
+        yield return new WaitForSeconds(time);
         messages[0].SetActive(true);
         input = true;
     }
