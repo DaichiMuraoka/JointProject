@@ -1,5 +1,5 @@
 ﻿//kanoko
-//インスペクターで指定されたレベル分のボタンを生成する
+//mapDelivererにあるレベル分のボタンを生成する level0はチュートリアル
 
 using UnityEngine;
 using System.Collections;
@@ -13,9 +13,9 @@ using TMPro;
 
 public class LevelButtonGenerator : MonoBehaviour
 {
-    [SerializeField] private GameObject[] levels = null;
     [SerializeField] private GameObject content = null;
     [SerializeField] private GameObject levelButton = null;
+    [SerializeField] private GameObject clearedSign = null;
     [SerializeField] private MapDeliverer mapDeliverer = null;
     [SerializeField] private GameObject fadeCurtain = null;
     
@@ -25,15 +25,28 @@ public class LevelButtonGenerator : MonoBehaviour
     void Start(){
         audioSource = gameObject.GetComponent<AudioSource>();
         fadeTransition = fadeCurtain.GetComponent<FadeTransition>();
+        //セーブデータ読み出し
+        Progress savedata = SaveDataManager.Instance.LoadProgress();
         
-        for(int i = 0; i < levels.Length; i++) {
+        for(int i = 1; i < mapDeliverer.LevelMax; i++) {
             //プレハブからボタンを生成
             GameObject listButton = Instantiate(levelButton) as GameObject;
-            
             //content の子にする
             listButton.transform.SetParent(content.transform, false);
             //ボタンの表示文字を設定
-            listButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "レベル" + (i+1).ToString();
+            listButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "レベル" + (i).ToString();
+            
+            //クリア済なら印をつける
+            foreach (ProgressData data in savedata.list)
+            {
+                if(data.level == i && data.clear)
+                {
+                    GameObject sign = Instantiate(clearedSign) as GameObject;
+                    //listButton の子にする
+                    sign.transform.SetParent(listButton.transform, false);
+                    break;
+                }
+            }
 
             int n = i;
             //クリック時の関数を設定
@@ -44,8 +57,7 @@ public class LevelButtonGenerator : MonoBehaviour
 
     void OnClickLevelButton(int index){
         //デリバラーにレベルをセット
-        mapDeliverer.Map = levels[index];
-        mapDeliverer.Level = index + 1;
+        mapDeliverer.Level = index;
         //フェード開始
         fadeTransition.StartFadeOut();
         //BGMの削除
