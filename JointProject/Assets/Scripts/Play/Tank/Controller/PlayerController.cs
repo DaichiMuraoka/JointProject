@@ -144,7 +144,7 @@ public class PlayerController : Controller
     private IEnumerator FetchPos(Vector3 before)
     {
         yield return null;
-        if(transform.position.y >= startY + 0.05f)
+        if(transform.position.y >= startY + 0.02f)
         {
             transform.position = before;
         }
