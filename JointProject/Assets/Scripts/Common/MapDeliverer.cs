@@ -16,7 +16,7 @@ public class MapDeliverer : ScriptableObject
     
     public int LevelMax
     {
-        get { return maps.Length; }
+        get { return maps.Length - 1; }
     }
 
     public int Level
