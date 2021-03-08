@@ -63,11 +63,14 @@ public class PlayerController : Controller
 
     private int id = 0;
 
+    private float startY = 0f;
+
     public int ID
     {
         set
         {
             id = value;
+            startY = transform.position.y;
             if(ModeSettingLoader.Instance.ModeSetting.PlayMode == PLAY_MODE.LOCAL && ModeSettingLoader.Instance.ModeSetting.PlayerCount == 2)
             {
                 if (id == 1)
@@ -117,8 +120,10 @@ public class PlayerController : Controller
         //移動
         float x = GetHorizontalAxis() * RotationSpeed * Time.deltaTime;
         float z = GetVerticalAxis() * MoveSpeed * Time.deltaTime;
+        Vector3 pos = transform.position;
         transform.Translate(transform.forward * z, Space.World);
         transform.Rotate(new Vector3(0, 1, 0), x);
+        StartCoroutine(FetchPos(pos));
         //発射
         foreach(KeyCode keyCode in nomalFireKey)
         {
@@ -133,6 +138,15 @@ public class PlayerController : Controller
             {
                 GetComponent<FireManager>().Fire(FIRE_TYPE.FLY);
             }
+        }
+    }
+
+    private IEnumerator FetchPos(Vector3 before)
+    {
+        yield return null;
+        if(transform.position.y >= startY + 0.05f)
+        {
+            transform.position = before;
         }
     }
 }
