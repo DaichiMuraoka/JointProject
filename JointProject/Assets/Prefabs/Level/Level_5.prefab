@@ -297,7 +297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d29841b39b51043abc2879110f7196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7780905305254517998
+--- !u!114 &8849914054208650796
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -306,12 +306,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 3002121212321917241}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d710649a48c45134f92bb3c864644f17, type: 3}
+  m_Script: {fileID: 11500000, guid: 8434a7741e608344d9cec8aa632ff7ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemyMove: {fileID: 0}
   fireManager: {fileID: 0}
   controller: {fileID: 0}
+  fireType: 1
+  interval: 2
 --- !u!1 &3316736443802200406
 GameObject:
   m_ObjectHideFlags: 0
@@ -402,23 +404,6 @@ Transform:
   m_Father: {fileID: 6084259321826628652}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8877012654648066843
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5758083447953940412}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bf8234e5678c2745a3c3fa7927012e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  route:
-  - {fileID: 3348134347023721253}
-  - {fileID: 1020022327565576461}
-  - {fileID: 4383494606614204552}
-  - {fileID: 1524262936185739244}
 --- !u!114 &3842356152375947681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -436,6 +421,23 @@ MonoBehaviour:
   controller: {fileID: 0}
   fireType: 0
   interval: 2
+--- !u!114 &8877012654648066843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5758083447953940412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bf8234e5678c2745a3c3fa7927012e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  route:
+  - {fileID: 3348134347023721253}
+  - {fileID: 1020022327565576461}
+  - {fileID: 4383494606614204552}
+  - {fileID: 1524262936185739244}
 --- !u!1 &5859669119036959030
 GameObject:
   m_ObjectHideFlags: 0
@@ -786,7 +788,7 @@ PrefabInstance:
     - target: {fileID: 8363429707959835410, guid: 81722dfaf08bf5b44903bfa1062b66c9,
         type: 3}
       propertyPath: target
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81722dfaf08bf5b44903bfa1062b66c9, type: 3}
