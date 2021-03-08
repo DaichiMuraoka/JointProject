@@ -28,7 +28,7 @@ public class LevelButtonGenerator : MonoBehaviour
         //セーブデータ読み出し
         Progress savedata = SaveDataManager.Instance.LoadProgress();
         
-        for(int i = 1; i < mapDeliverer.LevelMax; i++) {
+        for(int i = 1; i <= mapDeliverer.LevelMax; i++) {
             //プレハブからボタンを生成
             GameObject listButton = Instantiate(levelButton) as GameObject;
             //content の子にする
