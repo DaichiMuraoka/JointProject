@@ -99,7 +99,7 @@ public class Tank : MonoBehaviour
 #if UNITY_EDITOR
                 EditorApplication.delayCall += () => DestroyImmediate(playerController);
 #else
-                Destroy(enemyController);
+                Destroy(playerController);
 #endif
             }
         }
