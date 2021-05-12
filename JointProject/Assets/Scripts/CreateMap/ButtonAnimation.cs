@@ -34,6 +34,7 @@ public class ButtonAnimation : MonoBehaviour
     public void OnClick()
     {
         clicked = true;
+        button.interactable = false;
         anim.Stop();
     }
 }
