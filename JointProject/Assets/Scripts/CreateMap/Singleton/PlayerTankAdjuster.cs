@@ -11,7 +11,13 @@ public class PlayerTankAdjuster : Singleton<PlayerTankAdjuster>
         tankCount++;
         if(tankCount > ModeSettingLoader.Instance.ModeSetting.PlayerCount)
         {
+            Debug.Log("set " + player.name + " active false.");
             player.gameObject.SetActive(false);
         }
+    }
+    
+    public void InitCount()
+    {
+        tankCount = 0;
     }
 }

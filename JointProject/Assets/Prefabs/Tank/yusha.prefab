@@ -198,6 +198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nomalMuzzle: {fileID: 6668098025345878263}
   flyMuzzle: {fileID: 350667283899008706}
+  effect: {fileID: 1150934714579380, guid: 779aa8c25fbd0e1488637639c9fff976, type: 3}
   side: 2
 --- !u!114 &2427293169979286999
 MonoBehaviour:

@@ -346,7 +346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FadeIn: 1
   nextSceneName: Home
-  speed: 0.5
+  speed: 0.55
 --- !u!111 &180900674
 Animation:
   m_ObjectHideFlags: 0

@@ -83,9 +83,14 @@ public class BattleManager : Singleton<BattleManager>
             GameOver(SIDE.ENEMY);
         }
     }
+    
+    private GameObject Levelobj;
 
     private void Start()
     {
+        GameObject mapparts = GameObject.FindGameObjectWithTag("MapParts");
+        Levelobj = mapparts.transform.parent.gameObject;
+        
         LoadAllTanks();
         StartCoroutine(Test());
     }
@@ -203,12 +208,17 @@ public class BattleManager : Singleton<BattleManager>
         {
             sceneName = "CreateMap";
         }
+        else if(nextScene == PLAY_TO_NEXT.BATTLERETRY)
+        {
+            sceneName = "Play";
+        }
         else
         {
             sceneName = "Home";
         }
-        GameObject mapparts = GameObject.FindGameObjectWithTag("MapParts");
-        Destroy(mapparts.transform.parent.gameObject);
+        
+        //マップを削除
+        Destroy(Levelobj);
         SceneManager.LoadScene(sceneName);
     }
 }
@@ -218,5 +228,6 @@ public enum PLAY_TO_NEXT
     LEVELSELECT,
     NEXTLEVEL,
     RETRY,
+    BATTLERETRY,
     HOME
 }

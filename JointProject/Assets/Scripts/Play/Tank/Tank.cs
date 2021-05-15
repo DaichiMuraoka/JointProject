@@ -11,6 +11,9 @@ public class Tank : MonoBehaviour
 
     [SerializeField]
     private Transform flyMuzzle = null;
+    
+    [SerializeField]
+    private GameObject effect = null;
 
     public Transform GetMuzzle(FIRE_TYPE fireType)
     {
@@ -69,6 +72,9 @@ public class Tank : MonoBehaviour
 
     private IEnumerator Explosion(Collision collision)
     {
+        //破壊エフェクトを生成
+        Instantiate(effect, gameObject.transform.position, Quaternion.identity);
+        
         GetComponent<AudioSource>().Play();
         Debug.Log(name + " is explosion");
         Controller controller = GetComponent<Controller>();

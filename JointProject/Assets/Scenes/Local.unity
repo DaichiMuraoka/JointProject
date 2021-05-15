@@ -809,7 +809,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SceneName: LevelSelect
-  waitTime: 0.1
+  waitTime: 0
 --- !u!82 &614841121
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1556,7 +1556,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SceneName: LevelSelect
-  waitTime: 0.1
+  waitTime: 0
 --- !u!82 &1975294130
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1963,6 +1963,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 456743180564782636, guid: fd4f9b81b4b573f4e973482be0ff4bcc,
+        type: 3}
+      propertyPath: waitTime
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd4f9b81b4b573f4e973482be0ff4bcc, type: 3}

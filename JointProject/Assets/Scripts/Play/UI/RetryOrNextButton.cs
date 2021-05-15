@@ -7,6 +7,9 @@ public class RetryOrNextButton : MonoBehaviour
 {
     [SerializeField]
     private Button retryButton = null;
+    
+    [SerializeField]
+    private Button battleRetryButton = null;
 
     [SerializeField]
     private Button nextButton = null;
@@ -29,12 +32,14 @@ public class RetryOrNextButton : MonoBehaviour
     private void Retry()
     {
         retryButton.gameObject.SetActive(true);
+        battleRetryButton.gameObject.SetActive(true);
         nextButton.gameObject.SetActive(false);
     }
 
     private void Next()
     {
         retryButton.gameObject.SetActive(false);
+        battleRetryButton.gameObject.SetActive(false);
         nextButton.gameObject.SetActive(true);
     }
 
